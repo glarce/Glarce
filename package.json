@@ -8,12 +8,8 @@
   },
   "dependencies": {
     "aframe": "^0.8.2",
-    "axios": "^0.18.0",
     "register-service-worker": "^1.5.2",
-    "vue": "^2.5.22",
-    "vue-axios": "^2.1.4",
-    "vue-material": "^1.0.0-beta-10.2",
-    "vue-router": "^3.0.1"
+    "vue": "^2.5.22"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
@@ -22,5 +18,15 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
-  }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
