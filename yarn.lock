@@ -1106,6 +1106,11 @@ address@^1.0.3:
   resolved "https://registry.yarnpkg.com/address/-/address-1.0.3.tgz#b5f50631f8d6cec8bd20c963963afb55e06cbce9"
   integrity sha512-z55ocwKBRLryBs394Sm3ushTtBeg6VAeuku7utSoSnsJKvKcnXFIyC6vh27n3rXyxSgkJBBCAvyOn7gSUcTYjg==
 
+aframe-ar@^0.2.1-a:
+  version "0.2.1-a"
+  resolved "https://registry.yarnpkg.com/aframe-ar/-/aframe-ar-0.2.1-a.tgz#5f6e6a5ab9372a6dc800df0443588e3bfc20c2e6"
+  integrity sha512-JmUiIW6H2pm/uQ+ru3waM2ZBfXJ32CHh5JmLGVxhLXLIGC9dnpsLcYW2c7WPOWv5kpzSVi1pj4bckq/Y7C9dDg==
+
 aframe@^0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/aframe/-/aframe-0.8.2.tgz#435dd7c7d2f059316af87f4a9783427b0617e11f"
@@ -1205,6 +1210,11 @@ aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
   integrity sha512-Y9J6ZjXtoYh8RnXVCMOU/ttDmk1aBjunq9vO0ta5x85WDQiQfUF9sIPBITdbiiIVcBo03Hi3jMxigBtsddlXRw==
+
+ar.js@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/ar.js/-/ar.js-1.6.2.tgz#317ab7ec74330a49c54a1ebd32b829382797eaba"
+  integrity sha512-DyY2p+burggQXTbhBdYVZCCxtmUufJuj4JhbNT3gYbPMvJR1NafpvNihf5Bdel3QBkwy+uRgDfoOm3Gj7OyhPg==
 
 arch@^2.1.0:
   version "2.1.1"
@@ -2663,7 +2673,7 @@ debug@^4.1.0, debug@^4.1.1:
   dependencies:
     ms "^2.1.1"
 
-"debug@github:ngokevin/debug#noTimestamp":
+debug@ngokevin/debug#noTimestamp:
   version "2.2.0"
   resolved "https://codeload.github.com/ngokevin/debug/tar.gz/ef5f8e66d49ce8bc64c6f282c15f8b7164409e3a"
 
@@ -2863,7 +2873,7 @@ dns-txt@^2.0.2:
   dependencies:
     buffer-indexof "^1.0.0"
 
-"document-register-element@github:dmarcos/document-register-element#8ccc532b7":
+document-register-element@dmarcos/document-register-element#8ccc532b7:
   version "0.5.4"
   resolved "https://codeload.github.com/dmarcos/document-register-element/tar.gz/8ccc532b7f3744be954574caf3072a5fd260ca90"
 
