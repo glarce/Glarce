@@ -1,4 +1,4 @@
-[{
+{
     "Stuff": "http://au.gmented.com/app/marker/marker.php",
     "ScopeCue": "barcode_3x3",
     "codes": [{
@@ -45,4 +45,4 @@
             "location": "abc.jpg"
         }
     ]
-}]
+}
