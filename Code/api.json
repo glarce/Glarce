@@ -1,0 +1,48 @@
+{
+    "Stuff": "http://au.gmented.com/app/marker/marker.php",
+    "ScopeCue": "barcode_3x3",
+    "codes": [{
+            "Cue": 0,
+            "mediaType": "Video",
+            "location": "../bigbunny.webm",
+            "height": {
+                "ViewPortMin": "10px",
+                "ViewPortMax": "20px",
+                "Scale": "2x"
+            },
+            "width": {
+                "ViewPortMin": "10px",
+                "ViewPortMax": "20px",
+                "Scale": "2x"
+            }
+        },
+        {
+            "Cue": 1,
+            "mediaType": "3D",
+            "location": "abc.jpg"
+        }
+    ]
+}, {
+    "ScopeCue": "barcode_4x4",
+    "codes": [{
+            "Cue": 0,
+            "mediaType": "Video",
+            "location": "../bigbunny.webm",
+            "height": {
+                "ViewPortMin": "10px",
+                "ViewPortMax": "20px",
+                "Scale": "2x"
+            },
+            "width": {
+                "ViewPortMin": "10px",
+                "ViewPortMax": "20px",
+                "Scale": "2x"
+            }
+        },
+        {
+            "Cue": 1,
+            "mediaType": "Image",
+            "location": "abc.jpg"
+        }
+    ]
+}
