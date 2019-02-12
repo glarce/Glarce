@@ -1,29 +1,7 @@
-# Glarce
+# ES6-boilerplate
+Standard ES6 Boilerplate configured with babel, webpack and eslint.
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Usage
+* `npm start` to run eslint on watch mode and dev-server at localhost:8080.
+* `npm run watch` to only watch for/recompile on changes.
+* `npm run build` to generate a minified, production-ready build.
