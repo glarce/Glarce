@@ -1,10 +1,7 @@
 <template>
 <a-scene embedded arjs='detectionMode: mono_and_matrix; matrixCodeType: 3x3;' stats>
   <a-assets>
-    <video v-for="(marker, index) in markers" autoplay preload="auto" :id="'vid' + marker.value" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls>
-      <source type="video/webm" :src="marker.vid">
-      <h3>Error: Your browser does not support this program.</h3>
-    </video>
+    <video v-for="(marker, index) in markers" autoplay preload="auto" :id="'vid' + marker.value" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls type="video/webm" :src="marker.vid"></video>
   </a-assets>
 
   <slot v-for="(marker, index) in markers">
@@ -15,7 +12,7 @@
       </slot> -->
     <slot v-if="marker.style == 'barcode'">
       <a-marker type='barcode' :value='marker.value' :vidhandler="marker.value">
-        <a-video id="videoScreen" rotation="-90 0 0" :src="'#vid'+marker.value" autoplay=true></a-video>
+        <a-video :id="`videoScreen${marker.value}`" rotation="-90 0 0" :src="'#vid'+marker.value" autoplay="true" :height="marker.height" :width="marker.width"></a-video>
       </a-marker>
     </slot>
   </slot>
@@ -45,21 +42,16 @@ export default
         {
           style: 'barcode',
           value: 5,
-          vid: 'vids/5.webm'
+          vid: 'vids/5.webm',
+          width: 16 / 3,
+          height: 9 / 3
         }
       ]
     }
   },
   methods:
   {
-    refrespage()
-    {
-      location.reload();
-    },
-    playvid()
-    {
-      vid.play();
-    }
+
   },
   mounted: function()
   {
@@ -78,7 +70,6 @@ export default
       },
       tick: function()
       {
-        console.log('tick')
         if (this.el.object3D.visible == true)
         {
           if (!this.toggle)
@@ -93,28 +84,7 @@ export default
           this.vid.pause()
         }
       }
-    });
-
-    function refrespage()
-    {
-      location.reload();
-    }
-
-    function playvid()
-    {
-      vid.play();
-    }
+    })
   }
 };
 </script>
-
-<style lang="scss">
-#app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
-</style>
