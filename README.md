@@ -1,8 +1,10 @@
+[![Build Status](https://travis-ci.com/glarce/Glarce.svg?branch=master)](https://travis-ci.com/glarce/Glarce)
+
 # Glarce
 
 ## Project setup
 ```
-yarn install
+yarn
 ```
 
 ### Compiles and hot-reloads for development
