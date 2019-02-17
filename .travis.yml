@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+ - "node"
+script: yarn build
+
+deploy:
+  local-dir: dist
+  skip-cleanup: true
+  keep-history: true
+  provider: pages
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  on:
+    branch: master
