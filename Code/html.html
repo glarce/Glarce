@@ -13,15 +13,15 @@
   <a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
     <a-assets>
       <video preload="none" id="vid" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls>
-        <source type="video/webm" src="public/big-buck-bunny_trailer.webm">
+        <source type="video/webm" src="../public/vids/5.webm">
         <h3>Error : Your browser does not support.</h3>
         <!-- FOR NOTMAL VIDEO YOU CAN USE MP4 or WEBM BUT FOR ALPHA VIDEO YOU NEED TO USE .WEBM FORMAT-->
       </video>
       <video preload="auto" id="vid2" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls>
-          <source type="video/webm" src="public/big-buck-bunny_trailer.1.webm">
-          <h3>Error : Your browser does not support.</h3>
-          <!-- FOR NOTMAL VIDEO YOU CAN USE MP4 or WEBM BUT FOR ALPHA VIDEO YOU NEED TO USE .WEBM FORMAT-->
-        </video>
+        <source type="video/webm" src="../public/vids/5.webm">
+        <h3>Error : Your browser does not support.</h3>
+        <!-- FOR NOTMAL VIDEO YOU CAN USE MP4 or WEBM BUT FOR ALPHA VIDEO YOU NEED TO USE .WEBM FORMAT-->
+      </video>
     </a-assets>
     <!-- handle marker with hiro preset -->
     <a-marker type='barcode' value='6'>
@@ -39,13 +39,13 @@
 
   <script>
     AFRAME.registerComponent('vidhandler', {
-      init: function () {
+      init: function() {
         this.toggle = false;
-          this.vid = document.querySelector("#vid");
-          this.vid.pause();
+        this.vid = document.querySelector("#vid");
+        this.vid.pause();
 
       },
-      tick: function () {
+      tick: function() {
         if (this.el.object3D.visible == true) {
           if (!this.toggle) {
             this.toggle = true;
