@@ -1,10 +1,8 @@
----
-description: An overview of why we build Glarce AR
----
-
-# AR Experience in a browser
+[![Build Status](https://travis-ci.com/glarce/Glarce.svg?branch=master)](https://travis-ci.com/glarce/Glarce)
 
 [Github](https://github.com/glarce/Glarce)    \|    [Docs](https://glarce.gitbook.io/project)
+
+# AR Experience in a browser
 
 ## Why did we create Glarce AR?
 
