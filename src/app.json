@@ -1,0 +1,22 @@
+[
+    {
+        "scanType": "barcode",
+        "scan": 5,
+        "contentType": "videos",
+        "videoData": {
+            "id": 1,
+            "url": "videos/spook.webm",
+            "extension": "webm"
+        }
+    },
+    {
+        "scanType": "barcode",
+        "scan": 6,
+        "contentType": "videos",
+        "videoData": {
+            "id": 2,
+            "url": "videos/spook.webm",
+            "extension": "webm"
+        }
+    }
+]
