@@ -1,14 +1,14 @@
 self.__precacheManifest = [
   {
-    "revision": "9b2507c7f3e16c1f9995",
-    "url": "/Glarce/js/app.497c634e.js"
+    "revision": "b7b9e49a0726f917237f",
+    "url": "/Glarce/js/app.484a2070.js"
   },
   {
     "revision": "a4396c14f86eebe25f5e",
     "url": "/Glarce/js/chunk-vendors.26ca431f.js"
   },
   {
-    "revision": "d3b5f770631fbb76f401f8201fb98ed0",
+    "revision": "9fe8e31cf8ba28f083e955a2f5963043",
     "url": "/Glarce/index.html"
   },
   {
