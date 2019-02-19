@@ -1,19 +1,18 @@
 <template>
-<a-scene embedded arjs='detectionMode: mono_and_matrix; matrixCodeType: 3x3;' stats>
+<a-scene embedded arjs='detectionMode: mono_and_matrix; matrixCodeType: 3x3;, prodcution: true' :stats="`${dev}`">
   <a-assets>
-    <video v-for="(marker, index) in markers" autoplay preload="auto" :id="'vid' + marker.value" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls type="video/webm" :src="marker.vid"></video>
+    <slot v-if="contentTypes.videos">
+      <video v-for="(vid, index) in media.videos" autoplay preload="auto" :id="'vid'+vid.key" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls type="video/webm" :src="vid.url"></video>
+    </slot>
   </a-assets>
-
   <slot v-for="(marker, index) in markers">
     <!-- <slot v-if="marker.style == 'marker'">
         <a-marker :preset="marker.value">
           <a-box position="0 0.5 0" material="color: black;"></a-box>
         </a-marker>
       </slot> -->
-    <slot v-if="marker.style == 'barcode'">
-      <a-marker type='barcode' :value='marker.value' :vidhandler="marker.value">
-        <a-video :id="`videoScreen${marker.value}`" rotation="-90 0 0" :src="'#vid'+marker.value" autoplay="true" :height="marker.height" :width="marker.width"></a-video>
-      </a-marker>
+    <slot v-if="marker.scanType == 'barcode'">
+      <barcodeHelper :index="index" :barcodeData="marker.barcodeData"/>
     </slot>
   </slot>
   <a-entity camera></a-entity>
@@ -21,30 +20,39 @@
 </template>
 
 <script>
+let dev = process.env.NODE_ENV === 'development'
+import barcodeHelper from "./components/barcodeHelper.vue";
 export default
 {
   name: "app",
   components:
-  {},
+  {barcodeHelper},
   data()
   {
     return {
+      contentTypes: {
+        videos: "true"
+      },
+      media: {
+        videos: [
+          {
+            key: "spook",
+            url: "vids/5.webm"
+          }
+        ]
+      },
       markers: [
-        /*{
-        style: 'marker',
-        value: 'hiro'
-      },
-      {
-        style: 'marker',
-        value: 'kanji'
-      },
-      */
         {
-          style: 'barcode',
-          value: 5,
-          vid: 'vids/5.webm',
-          width: 16 / 3,
-          height: 9 / 3
+          scanType: 'barcode',
+          barcodeData: {
+            scan: 5,
+            contentType: "video",
+            videoData: {
+              id: "spook",
+              width: 16 / 3,
+              height: 9 / 3
+            }
+          }
         }
       ]
     }
@@ -52,39 +60,6 @@ export default
   methods:
   {
 
-  },
-  mounted: function()
-  {
-    AFRAME.registerComponent('vidhandler',
-    {
-      schema:
-      {
-        default: 0
-      },
-      init: function()
-      {
-        this.vid = document.getElementById(`vid${this.data}`)
-        this.vid.pause()
-
-        this.tick = AFRAME.utils.throttleTick(this.tick, 200, this);
-      },
-      tick: function()
-      {
-        if (this.el.object3D.visible == true)
-        {
-          if (!this.toggle)
-          {
-            this.toggle = true
-            this.vid.play()
-          }
-        }
-        else
-        {
-          this.toggle = false
-          this.vid.pause()
-        }
-      }
-    })
   }
 };
 </script>
