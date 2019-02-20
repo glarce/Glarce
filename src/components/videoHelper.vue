@@ -1,5 +1,5 @@
 <template>
-    <a-video :id="`videoScreen${index}`" rotation="-90 0 0" :src="'#vid'+videoData.id" autoplay="true" :height="videoData.height" :width="videoData.width"></a-video>
+    <a-video :id="`videoScreen${index}`" rotation="-90 0 0" :src="'#vid'+videoData.id" autoplay="true" :width="16 / 3" :height="9 / 3"></a-video>
 </template>
 
 <script>
@@ -17,6 +17,7 @@ export default {
       init: function()
       {
         this.vid = document.getElementById(`vid${this.el.attributes.vidhandler.value}`)
+        console.log(this.vid)
         this.vid.pause()
 
         this.tick = AFRAME.utils.throttleTick(this.tick, 200, this);

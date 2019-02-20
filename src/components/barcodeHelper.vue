@@ -1,5 +1,5 @@
 <template>
-    <a-marker v-if="barcodeData.contentType == 'video'" type='barcode' :value='barcodeData.scan' :vidhandler="barcodeData.videoData.id">
+    <a-marker v-if="barcodeData.contentType == 'videos'" type='barcode' :value='barcodeData.scan' :vidhandler="barcodeData.videoData.id">
         <videoHelper :index="index" :videoData="barcodeData.videoData"/>
     </a-marker>
 </template>
