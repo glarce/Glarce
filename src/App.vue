@@ -1,5 +1,5 @@
 <template>
-<a-scene embedded arjs='detectionMode: mono_and_matrix; matrixCodeType: 3x3;, prodcution: true' :stats="`${dev}`">
+<a-scene arjs='detectionMode: mono_and_matrix; matrixCodeType: 3x3;, prodcution: true' :stats="`${dev}`">
   <a-assets>
     <slot v-if="contentTypes.videos">
       <video v-for="(vid, index) in media.videos" autoplay preload="auto" :id="'vid'+vid.key" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls type="video/webm" :src="vid.url"></video>
@@ -12,7 +12,7 @@
         </a-marker>
       </slot> -->
     <slot v-if="marker.scanType == 'barcode'">
-      <barcodeHelper :index="index" :barcodeData="marker.barcodeData"/>
+      <barcodeHelper :index="index" :barcodeData="marker.barcodeData" />
     </slot>
   </slot>
   <a-entity camera></a-entity>
@@ -26,35 +26,39 @@ export default
 {
   name: "app",
   components:
-  {barcodeHelper},
+  {
+    barcodeHelper
+  },
   data()
   {
     return {
-      contentTypes: {
+      contentTypes:
+      {
         videos: "true"
       },
-      media: {
+      media:
+      {
         videos: [
-          {
-            key: "spook",
-            url: "vids/5.webm"
-          }
-        ]
+        {
+          key: "spook",
+          url: "vids/5.webm"
+        }]
       },
       markers: [
+      {
+        scanType: 'barcode',
+        barcodeData:
         {
-          scanType: 'barcode',
-          barcodeData: {
-            scan: 5,
-            contentType: "video",
-            videoData: {
-              id: "spook",
-              width: 16 / 3,
-              height: 9 / 3
-            }
+          scan: 5,
+          contentType: "video",
+          videoData:
+          {
+            id: "spook",
+            width: 16 / 3,
+            height: 9 / 3
           }
         }
-      ]
+      }]
     }
   },
   methods:
