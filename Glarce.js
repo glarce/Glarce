@@ -1,32 +1,25 @@
 var fs = require('fs-extra');
-var json = [];
+var json = [{}];
 var index = 0;
 var shell = require("shelljs")
 const symlinkDir = require('symlink-dir')
 module.exports = function Glarce() {
-  this.set = function(input, variable) {}
+  this.set = function(input, variable) {
+  }
   this.get = function(string, funct) {
     index = index + 1
     funct(new res(string))
   }
   this.start = function() {
-    console.log(JSON.stringify(json))
-    symlinkDir('media', 'node_modules/Glarce/public/media')
-      .then(result => {
-        console.log(result)
-        //> { reused: false }
+    var production;
+    if(process.env.production) production="build"
+    else production="serve --https"
 
-        return symlinkDir('media', 'node_modules/Glarce/public/media')
-      })
-      .then(result => {
-        console.log(result)
-        //> { reused: true }
-      })
-      .catch(err => console.error(err))
+    console.log(JSON.stringify(json))
     fs.writeFile('./node_modules/Glarce/src/app.json', JSON.stringify(json), 'utf8', (err) => {
       if (err) throw err;
       console.log('The file has been saved!');
-      shell.exec("node ./node_modules/@vue/cli-service/bin/vue-cli-service build", {
+      shell.exec(`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${production}`, {
         cwd: "node_modules/Glarce"
       })
       fs.move('./node_modules/Glarce/dist', './dist/', {
@@ -35,9 +28,6 @@ module.exports = function Glarce() {
         if (err) return console.error(err);
       });
     });
-
-
-
   }
 }
 
@@ -51,6 +41,8 @@ function res(key) {
       newJson.scan = key
     }
     if ("videos" == getType(string)) {
+      json[0].videos = true
+      symlink("videos")
       newJson.contentType = "videos"
       newJson.videoData = {}
       newJson.videoData.id = index
@@ -64,6 +56,18 @@ function res(key) {
       } else {
         newJson.videoData.height = 16 / 9
         newJson.videoData.width = 9 / 3
+      }
+    }else if ("notify" == getType(string)){
+      console.log("Notify")
+      let notify = string.slice(getType(string).length+1)
+      console.log(notify)
+      if("alert" == getType(notify)){
+        let notify = getType("alert")
+        console.log(notify)
+        newJson.contentType = "notify"
+        newJson.notificationData = {}
+        newJson.notificationData.action = "alert"
+        newJson.notificationData.content = notify
       }
     }
     json.push(newJson)
@@ -79,4 +83,19 @@ function getFileExtension(string) {
   var x = string.match(/\.[0-9a-z]+$/i)
   var x = x.toString()
   return (x.slice(1))
+}
+
+function symlink(dir){
+  symlinkDir(dir, 'node_modules/Glarce/public/'+dir)
+  .then(result => {
+    console.log(result)
+    //> { reused: false }
+
+    return symlinkDir(dir, 'node_modules/Glarce/public/'+dir)
+  })
+  .then(result => {
+    console.log(result)
+    //> { reused: true }
+  })
+  .catch(err => console.error(err))
 }
