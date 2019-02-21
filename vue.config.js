@@ -2,6 +2,8 @@ module.exports = {
   pwa: {
     name: 'Glarce'
   },
+
+  publicPath: '/',
   outputDir: undefined,
   assetsDir: undefined,
   runtimeCompiler: undefined,
