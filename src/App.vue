@@ -4,6 +4,7 @@
     :stats="`${dev}`"
   >
     <a-assets>
+        <slot v-if="markers[0].hasOwnProperty('videos')">
         <video
           v-for="(vid, index) in markers"
           autoplay
@@ -18,6 +19,7 @@
           :type="'video/'+vid.videoData.extension"
           :src="'media/'+vid.videoData.url"
         ></video>
+        </slot>
     </a-assets>
     <slot v-for="(marker, index) in markers">
       <!-- <slot v-if="marker.style == 'marker'">

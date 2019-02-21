@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "Glarce": "../"
+    "Glarce": "../",
+    "cross-env": "^5.2.0"
   },
   "scripts": {
-    "build": "node app"
+    "build": "cross-env production=true node app",
+    "serve": "node app"
   }
 }
