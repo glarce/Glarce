@@ -1,8 +1,9 @@
 <template>
 <a-scene arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;, prodcution: true" :stats="`${dev}`">
   <a-assets>
-    <slot v-if="markers[0].hasOwnProperty('videos')">
-      <video v-for="(vid, index) in markers" autoplay preload="auto" :id="'vid'+vid.videoData.id" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls :type="'video/'+vid.videoData.extension" :src="'media/'+vid.videoData.url"></video>
+    <slot>
+      <video v-for="(vid, index) in markers" v-if="vid.contentType == 'video'" autoplay preload="auto" :id="'vid'+vid.videoData.id" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls :type="'video/'+vid.videoData.extension"
+        :src="vid.videoData.url"></video>
     </slot>
   </a-assets>
   <slot v-for="(marker, index) in markers">
@@ -19,7 +20,7 @@ let marker = require("./app.json");
 let dev = process.env.NODE_ENV === "development";
 import barcodeHelper from "./components/barcodeHelper.vue";
 
-// import interactivityHelper from './scripts/interactivityHelper'
+import interactivityHelper from './scripts/interactivityHelper'
 
 export default
 {
@@ -31,7 +32,8 @@ export default
   data()
   {
     return {
-      markers: marker
+      markers: marker,
+      dev: process.env.NODE_ENV === "development"
     };
   },
   mounted: function()

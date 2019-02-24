@@ -1,6 +1,8 @@
-export default function
+import EventBus from './eventBus'
+
+export default function()
 {
-  AFRAME.registerComponent('interactivityHelper',
+  AFRAME.registerComponent('interactivity-helper',
   {
     schema:
     {
@@ -31,13 +33,22 @@ export default function
 
       for (var i = 0; i < interactiveLength; i++)
       {
-        if (!this.interactive.executed)
+        if (!this.interactive[i].executed)
         { // don't run if this has already been executed
-          if (this.interactive.sec > time && this.interactive.sec + 1 > time)
+          if (this.interactive[i].sec > time && this.interactive[i].sec + 1 > time)
           { // if the time point is within the time specified
+            this.vid.pause()
 
+            if (this.interactive[i].type == end)
+            {
+              this.vid.currentTime = this.vid.duration
+            }
+            else
+            {
+              EventBus.$emit('loadInteractive', this.interactive[i].id)
+            }
 
-            this.executed = true
+            this.interactive[i].executed = true
           }
         }
       }

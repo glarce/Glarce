@@ -1,7 +1,6 @@
 const func = require('./functions')
 
-let json = [
-{}]
+let json = []
 var index = 0
 
 class Res
@@ -24,6 +23,8 @@ class Res
       let object = parmas[keys[i]]
       object.sec = Number(keys[i])
       object.executed = false
+      // generate unique id
+      object.id = Number(index.toString() + i.toString())
 
       interactive[i] = object
     }
@@ -45,11 +46,9 @@ class Res
 
     if ("videos" == func.getType(string))
     {
-      json[0].videos = true
-
       func.linkMediaFolder("videos")
 
-      this.newJson.contentType = "videos"
+      this.newJson.contentType = "video"
       this.newJson.videoData = {
         id: index,
         url: string,

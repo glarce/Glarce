@@ -10,6 +10,6 @@
   "scripts": {
     "build": "cross-env production=true node app",
     "serve": "node app",
-    "test": "rm -rf node_modules/Glarce && yarn add ../ && yarn build"
+    "test": "rm -rf node_modules/Glarce && yarn add ../ && yarn serve"
   }
 }
