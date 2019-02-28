@@ -64,14 +64,14 @@ class Res
       if (params != null)
       {
         if (params.height != null) this.newJson.videoData.height = params.height
-        else params.height = 16 / 3
+        else params.height = 9 / 3
         if (params.width != null) this.newJson.videoData.width = params.width;
-        else params.width = 9 / 3
+        else params.width = 16 / 3
       }
       else
       {
-        this.newJson.videoData.height = 16 / 3
-        this.newJson.videoData.width = 9 / 3
+        this.newJson.videoData.height = 9 / 3
+        this.newJson.videoData.width = 16 / 3
       }
     }
     else if ("notify" == func.getType(string))

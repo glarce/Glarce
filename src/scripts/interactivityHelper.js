@@ -19,14 +19,18 @@ export default function()
     init: function()
     {
       this.vid = document.getElementById(`vid${this.data.vidId}`)
-      this.vid.ontimeupdate = this.ontimeupdate
+      console.log(this.vid);
+      this.vid.ontimeupdate = this.timeUpdate
 
       // bypass schema change lock
-      this.interactive = this.data.interactivity
+      this.interactive = JSON.parse(this.data.interactivity)
 
       this.tick = AFRAME.utils.throttleTick(this.tick, 200, this)
     },
-    timeUpdate: function()
+    timeUpdate: function() {
+
+    },
+    tick: function()
     {
       const time = this.vid.currentTime
       const interactiveLength = this.interactive.length
@@ -52,9 +56,6 @@ export default function()
           }
         }
       }
-    },
-    tick: function() {
-
     }
   })
 }
