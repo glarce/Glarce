@@ -20,6 +20,8 @@ export default
   props: ['vidId', 'data'],
   data: function()
   {
+    let data = this.data
+
     let btnText = 'Ok'
 
     if (this.data.button != undefined)

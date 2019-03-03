@@ -40,10 +40,20 @@ export default function()
         if (this.data.vidId == id)
         {
           this.shouldPlay = true
+          this.toggle = false
+        }
+      }.bind(this)
+
+      let jump = function(id, time)
+      {
+        if (this.data.vidId == id)
+        {
+          this.vid.currentTime = time
         }
       }.bind(this)
 
       EventBus.$on('play', (id) => playVid(id))
+      EventBus.$on('jump', (data) => playVid(data.id, data.sec))
     },
     tick: function()
     {
@@ -62,7 +72,6 @@ export default function()
       }
 
       const time = Math.floor(this.vid.currentTime)
-      console.log(time)
       const interactiveLength = this.interactive.length
 
       for (var i = 0; i < interactiveLength; i++)
