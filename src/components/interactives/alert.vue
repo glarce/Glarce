@@ -1,15 +1,24 @@
 <template>
 <div>
-  <md-dialog-alert :md-active.sync="display" :md-title="data.title" :md-content="data.text" :md-confirm-text="btnText" @update:mdActive="" />
+  <md-dialog :md-fullscreen="false" :md-active.sync="display">
+    <md-dialog-title v-if="data.title">{{ data.title }}</md-dialog-title>
+    <md-dialog-content v-if="data.text" v-html="data.text" />
+
+    <md-dialog-actions>
+      <md-button class="md-primary" @click="play()">{{ btnText }}</md-button>
+    </md-dialog-actions>
+  </md-dialog>
 </div>
 </template>
 
 <script>
+import EventBus from '../../scripts/eventBus';
+
 export default
 {
   name: 'alert',
   props: ['vidId', 'data'],
-  data: () =>
+  data: function()
   {
     let btnText = 'Ok'
 
@@ -20,15 +29,35 @@ export default
 
     return {
       btnText: btnText,
-      display: false
+      display: false,
+      id: this.data.id
     }
   },
   methods:
   {
     play: function()
     {
-      let vid = document.getElementById(`vid${vidId}`)
+      console.log(`${this.id}: Playing video`)
+
+      this.display = false
+
+      EventBus.$emit('play', this.vidId)
+    },
+    loadInteractive: function(id)
+    {
+      if (id == this.id)
+      {
+        console.log(`${this.id}: Triggured`)
+
+        this.display = true
+      }
     }
+  },
+  mounted: function()
+  {
+    console.log(`${this.id}: Mounting`)
+
+    EventBus.$on('loadInteractive', this.loadInteractive)
   }
 }
 </script>

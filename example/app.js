@@ -5,13 +5,13 @@ app.get(5, (res, req) =>
 {
   res.interactivity(
   {
-    1:
+    2:
     {
       type: 'alert',
       title: 'Pause',
       text: 'Continue watching...'
     },
-    2:
+    3:
     {
       type: 'question',
       title: 'Jump',
@@ -25,7 +25,7 @@ app.get(5, (res, req) =>
         text: 'no'
       }]
     },
-    3:
+    4:
     {
       type: 'end'
     }

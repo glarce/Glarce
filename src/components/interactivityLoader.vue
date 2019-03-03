@@ -11,7 +11,7 @@ import question from './interactives/question.vue'
 
 export default
 {
-  name: 'interactive',
+  name: 'interactivityLoader',
   props: ['vidId', 'data'],
   components:
   {
