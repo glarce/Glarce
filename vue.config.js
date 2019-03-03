@@ -3,7 +3,7 @@ module.exports = {
     name: 'Glarce'
   },
 
-  publicPath: '/Glarce/',
+  publicPath: process.env.publicPath || '/',
   outputDir: undefined,
   assetsDir: undefined,
   runtimeCompiler: undefined,
