@@ -7,9 +7,7 @@ const Res = require('./Res').Res
 const resHandlers = require('./Res').handlers
 
 module.exports = class Glarce
-{
-  set(input, variable)
-  {}
+{}
 
   get(string, funct)
   {
