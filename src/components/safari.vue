@@ -24,6 +24,8 @@ export default
   {
     start: function(id)
     {
+      console.info(`Safari Handeler Frontend: Changing to ${id}`)
+
       this.currentId = id
 
       this.display = true
@@ -32,11 +34,14 @@ export default
     {
       if (this.display)
       {
-        let vid = document.getElementById(`vid${this.currentId}`)
+        /* let vid = document.getElementById(`vid${this.currentId}`)
         vid.play()
-        vid.pause()
+        vid.pause() */
 
         this.display = false
+
+        console.info('Safari Handeler Frontend: Sending safari done event')
+        EventBus.$emit('safariDone', this.currentId)
       }
     }
   },
