@@ -1,6 +1,6 @@
 <template>
 <div>
-  <md-dialog :md-active.sync="display">
+  <md-dialog :md-active.sync="display" :md-backdrop="false">
     <md-dialog-title>{{ data.title }}</md-dialog-title>
 
     <md-dialog-content v-if="data.text" v-html="data.text" />
