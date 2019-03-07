@@ -30,7 +30,7 @@ app.get(5, (res, req) =>
       type: 'end'
     }
   })
-  res.send(["videos/spook.webm", "videos/spook.m4v"])
+  res.send(["videos/spook.webm", "videos/spook.mp4"])
 })
 
 app.start()
