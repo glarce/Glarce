@@ -34,10 +34,6 @@ export default
     {
       if (this.display)
       {
-        /* let vid = document.getElementById(`vid${this.currentId}`)
-        vid.play()
-        vid.pause() */
-
         this.display = false
 
         console.info('Safari Handeler Frontend: Sending safari done event')
