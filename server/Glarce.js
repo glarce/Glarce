@@ -12,9 +12,10 @@ module.exports = class Glarce
   {
     switch (input) {
       case "publicPath":
-        process.env.publicPath = variable
+        if(process.env.production) process.env.publicPath = variable
         break;
-    
+      case "devPublicPath":
+        if(!process.env.production) process.env.publicPath = variable
       default:
         break;
     }
