@@ -9,7 +9,16 @@ const resHandlers = require('./Res').handlers
 module.exports = class Glarce
 {
   set(input, variable)
-  {}
+  {
+    switch (input) {
+      case "publicPath":
+        process.env.publicPath = variable
+        break;
+    
+      default:
+        break;
+    }
+  }
 
   get(string, funct)
   {
