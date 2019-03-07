@@ -44,15 +44,44 @@ class Res
       this.newJson.scan = this.key
     }
 
-    if ("videos" == func.getType(string))
+    let isVid = false
+
+    if (string.constructor === Array)
+    {
+      isVid = "videos" == func.getType(string[0])
+    }
+    else
+    {
+      isVid = "videos" == func.getType(string)
+    }
+
+    if (isVid)
     {
       func.linkMediaFolder("videos")
 
       this.newJson.contentType = "video"
       this.newJson.videoData = {
-        id: index,
-        url: string,
-        extension: func.getFileExtension(string)
+        id: index
+      }
+
+      this.newJson.videoData.vids = []
+
+      if (string.constructor === Array)
+      {
+        for (var i = 0; i < string.length; i++)
+        {
+          this.newJson.videoData.vids[i] = {
+            url: string[i],
+            extension: func.getFileExtension(string[i])
+          }
+        }
+      }
+      else
+      {
+        this.newJson.videoData.vids[0] = {
+          url: string,
+          extension: func.getFileExtension(string)
+        }
       }
 
       if (this.newJson.interactive != undefined)
@@ -60,6 +89,7 @@ class Res
         this.newJson.videoData.interactive = this.newJson.interactive
         delete this.newJson.interactive
       }
+
 
       if (params != null)
       {

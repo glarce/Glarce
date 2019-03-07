@@ -3,8 +3,10 @@
   <safari />
 
   <a-assets>
-    <slot>
-      <video v-for="(vid, index) in markers" v-if="vid.contentType == 'video'" preload="auto" :id="'vid'+vid.videoData.id" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls :type="'video/'+vid.videoData.extension" :src="vid.videoData.url"></video>
+    <slot v-for="(vid, index) in markers">
+      <video v-if="vid.contentType == 'video'" preload="auto" :id="'vid'+vid.videoData.id" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls>
+        <source v-for="(vidSrc, index) in vid.videoData.vids" :type="'video/'+vidSrc.extension" :src="vidSrc.url">
+      </video>
     </slot>
   </a-assets>
   <slot v-for="(marker, index) in markers">
