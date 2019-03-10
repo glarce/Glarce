@@ -5,7 +5,8 @@
   "main": "server/Glarce.js",
   "scripts": {
     "serve": "vue-cli-service serve --https",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "travis": "cd travis && yarn && yarn build"
   },
   "dependencies": {
     "create-symlink": "^1.0.0",
