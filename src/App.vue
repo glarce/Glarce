@@ -1,8 +1,5 @@
 <template>
 <a-scene arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;, prodcution: true" :stats="`${dev}`">
-  <!-- Used to make sure that orientation code and event listeners have been loaded -->
-  <a-node id="waitOnMe"></a-node>
-
   <safari />
 
   <a-assets>
@@ -50,21 +47,29 @@ export default
 
     // Load
     document.querySelector('a-scene').addEventListener('loaded', this.orientation)
+
     // Future orientation changes
-    window.addEventListener("orientationchange", this.orientation);
+    window.addEventListener("orientationchange", this.orientation)
   },
   methods:
   {
     orientation: function()
     {
-      if (window.innerHeight > window.innerWidth)
-      { // Is portrait
-        document.querySelector('a-scene').pause()
-      }
-      else
-      { // Is landscape
-        document.querySelector('a-scene').play()
-      }
+      console.log('orientation change!');
+
+      setTimeout(function()
+      {
+        if (window.innerHeight > window.innerWidth)
+        { // Is portrait
+          console.log('portrait')
+          document.querySelector('a-scene').pause()
+        }
+        else
+        { // Is landscape
+          console.log('landscape')
+          document.querySelector('a-scene').play()
+        }
+      }, 20)
     }
   }
 };
