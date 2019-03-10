@@ -1,5 +1,8 @@
 <template>
 <a-scene arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;, prodcution: true" :stats="`${dev}`">
+  <!-- Used to make sure that orientation code and event listeners have been loaded -->
+  <a-node id="waitOnMe"></a-node>
+
   <safari />
 
   <a-assets>
@@ -44,8 +47,60 @@ export default
   mounted: function()
   {
     interactivityHelper()
+
+    // Load
+    document.querySelector('a-scene').addEventListener('loaded', this.orientation)
+    // Future orientation changes
+    window.addEventListener("orientationchange", this.orientation);
   },
   methods:
-  {}
+  {
+    orientation: function()
+    {
+      if (window.innerHeight > window.innerWidth)
+      { // Is portrait
+        document.querySelector('a-scene').pause()
+      }
+      else
+      { // Is landscape
+        document.querySelector('a-scene').play()
+      }
+    }
+  }
 };
 </script>
+
+<style lang="scss">
+// Kill list
+#arjsDebugUIContainer,
+#orientation,
+.a-enter-vr {
+    display: none !important;
+}
+
+#orientation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (orientation:portrait) {
+    #orientation {
+        display: block !important;
+
+        width: 25%;
+        height: 25%;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .a-canvas,
+    video {
+        display: none;
+    }
+}
+</style>
