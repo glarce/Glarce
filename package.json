@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --https",
     "build": "vue-cli-service build",
-    "travis": "cd travis && yarn && yarn build"
+    "travis": "cd travis && yarn build"
   },
   "dependencies": {
     "create-symlink": "^1.0.0",
