@@ -2,6 +2,8 @@
 node_modules
 /dist
 
+examples/
+
 # local env files
 .env.local
 .env.*.local

@@ -1,11 +1,11 @@
 language: node_js
 node_js:
  - "node"
-before_script: cd example && yarn
-script: yarn build
+before_script: cd .. && git clone https://github.com/glarce/examples.git && cd Glarce
+script: yarn travis
 
 deploy:
-  local-dir: dist
+  local-dir: ../examples/dev/dist
   skip-cleanup: true
   keep-history: true
   provider: pages
