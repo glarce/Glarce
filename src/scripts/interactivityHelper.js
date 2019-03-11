@@ -191,6 +191,9 @@ export default function()
             // If it is something else
             else
             {
+              // Pause A-scene
+              document.querySelector('a-scene').pause()
+
               // Send it to interactive components
               EventBus.$emit('loadInteractive', this.interactive[i].id)
             }

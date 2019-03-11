@@ -43,6 +43,9 @@ export default
 
       this.display = false
 
+      // Start A-scene
+      document.querySelector('a-scene').play()
+
       EventBus.$emit('play', this.vidId)
     },
     loadInteractive: function(id)
