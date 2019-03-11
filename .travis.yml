@@ -1,7 +1,7 @@
 language: node_js
 node_js:
  - "node"
-before_script: git clone https://github.com/glarce/examples.git && cd examples && mv travis/ ../ && cd .. && cd travis && yarn && cd ..
+before_script: git clone https://github.com/glarce/examples.git && cd examples && mv dev/ ../ && cd .. && cd dev && yarn && cd ..
 script: yarn travis
 
 deploy:
