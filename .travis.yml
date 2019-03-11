@@ -1,8 +1,8 @@
 language: node_js
 node_js:
  - "node"
-before_script: cd .. && git clone https://github.com/glarce/examples.git && cd Glarce && yarn
-script: yarn testBuild
+before_script: cd .. && git clone https://github.com/glarce/examples.git && cd Glarce
+script: yarn && yarn testBuild
 
 deploy:
   local-dir: ../examples/dev/dist
