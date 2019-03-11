@@ -104,17 +104,16 @@ class Glarce
     {
       info(chalk.red('Starting a dev server'))
       info(chalk.bold.red('DO NOT USE THIS FOR PRODUCTION'))
-      info('')
     }
 
-    info('...')
+    info('')
 
     shell.exec(`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${flags}`,
     {
-      cwd: "node_modules/Glarce",
-      silent: true
+      cwd: "node_modules/Glarce"
     })
 
+    info('')
     info(chalk.green('Moving build files to ./dist/'))
     fs.move('./node_modules/Glarce/dist', './dist/',
     {
