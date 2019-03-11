@@ -4,8 +4,8 @@
   "private": true,
   "main": "server/Glarce.js",
   "scripts": {
-    "serve": "vue-cli-service serve --https",
-    "build": "vue-cli-service build"
+    "test": "cd ../examples/dev & yarn install --force & yarn serve",
+    "testBuild": "cd ../examples/dev & yarn install --force & yarn build"
   },
   "dependencies": {
     "create-symlink": "^1.0.0",
