@@ -1,7 +1,7 @@
 language: node_js
 node_js:
  - "node"
-before_script: cd .. && git clone https://github.com/glarce/examples.git
+before_script: cd .. && git clone https://github.com/glarce/examples.git && cd Glarce
 script: yarn testBuild
 
 deploy:
