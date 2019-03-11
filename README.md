@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/glarce/Glarce.svg?branch=master)](https://travis-ci.com/glarce/Glarce)
+[![CodeFactor](https://www.codefactor.io/repository/github/glarce/glarce/badge)](https://www.codefactor.io/repository/github/glarce/glarce)
 
 [Github](https://github.com/glarce/Glarce)    \|    [Docs](https://glarce.gitbook.io/project)
 
