@@ -6,7 +6,6 @@
   "scripts": {
     "serve": "vue-cli-service serve --https",
     "build": "vue-cli-service build",
-    "travis": "cd dev && yarn build",
     "test": "cd ../examples/dev & yarn install --force & yarn serve",
     "testBuild": "cd ../examples/dev & yarn install --force & yarn build"
   },
