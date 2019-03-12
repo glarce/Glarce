@@ -7,7 +7,19 @@ const Res = require('./Res').Res
 const resHandlers = require('./Res').handlers
 
 module.exports = class Glarce
-{}
+{
+  set(input, variable)
+  {
+    switch (input) {
+      case "publicPath":
+        if(process.env.production) process.env.publicPath = variable
+        break;
+      case "devPublicPath":
+        if(!process.env.production) process.env.publicPath = variable
+      default:
+        break;
+    }
+  }
 
   get(string, funct)
   {

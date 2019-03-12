@@ -1,6 +1,9 @@
 const Glarce = require("Glarce")
 const app = new Glarce()
 
+app.set("publicPath", "/Glarce")
+app.set("devPublicPath", "/")
+
 app.get(5, (res, req) =>
 {
   res.interactivity(
