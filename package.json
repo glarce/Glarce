@@ -20,7 +20,8 @@
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-pwa": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
-    "eslint-config-xo": "^0.26.0",
+    "eslint": "^5.15.1",
+    "eslint-plugin-vue": "^5.2.2",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
@@ -29,9 +30,6 @@
     "plugins": {
       "autoprefixer": {}
     }
-  },
-  "eslintConfig": {
-    "extends": "xo/esnext"
   },
   "browserslist": [
     "> 1%",
