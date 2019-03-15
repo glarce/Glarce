@@ -1,9 +1,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6c775921970745daa6a97e179c88e045)](https://app.codacy.com/app/glarce/Glarce?utm_source=github.com&utm_medium=referral&utm_content=glarce/Glarce&utm_campaign=Badge_Grade_Settings)
 [![Build Status](https://travis-ci.com/glarce/Glarce.svg?branch=master)](https://travis-ci.com/glarce/Glarce)
 
-
-[Github](https://github.com/glarce/Glarce)    \|    [Docs](https://glarce.gitbook.io/project)
-
 # AR Experience in a browser
 
 ## Why did we create Glarce AR
