@@ -138,7 +138,7 @@ export default function()
       // Manage interactive systems
       this.interactiveManager()
     },
-    objectVisibility: function()
+    objectVisibility()
     {
       // If it is visible
       if (this.el.object3D.visible === true)
@@ -172,7 +172,7 @@ export default function()
         }
       }
     },
-    interactiveManager: function()
+    interactiveManager()
     {
       // Get the video time in seconds
       const time = Math.floor(this.vid.currentTime)
