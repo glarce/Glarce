@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import EventBus from '../../scripts/eventBus';
+import EventBus from '../../scripts/eventBus'
 
 export default
 {
   name: 'question',
   props: ['vidId', 'data'],
-  data: function()
+  data()
   {
     return {
       display: false,
@@ -28,14 +28,14 @@ export default
   },
   methods:
   {
-    click: function(index)
+    click(index)
     {
       console.log(index)
       console.log(this)
 
       const button = this.data.buttons[index]
 
-      if (button.jumpTo != undefined)
+      if (typeof button.jumpTo !== 'undefined')
       {
         console.log(`${this.id}: Jumping to ${button.jumpTo} seconds`)
 
@@ -48,7 +48,7 @@ export default
 
       this.play()
     },
-    play: function()
+    play()
     {
       console.log(`${this.id}: Playing video`)
 
@@ -59,9 +59,9 @@ export default
 
       EventBus.$emit('play', this.vidId)
     },
-    loadInteractive: function(id)
+    loadInteractive(id)
     {
-      if (id == this.id)
+      if (id === this.id)
       {
         console.log(`${this.id}: Triggured`)
 
@@ -69,7 +69,7 @@ export default
       }
     }
   },
-  mounted: function()
+  mounted()
   {
     console.log(`${this.id}: Mounting`)
 

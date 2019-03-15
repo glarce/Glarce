@@ -22,7 +22,7 @@ export default
   },
   methods:
   {
-    start: function(id)
+    start(id)
     {
       console.info(`Safari Handeler Frontend: Changing to ${id}`)
 
@@ -30,7 +30,7 @@ export default
 
       this.display = true
     },
-    tap: function()
+    tap()
     {
       if (this.display)
       {
@@ -41,7 +41,7 @@ export default
       }
     }
   },
-  mounted: function()
+  mounted()
   {
     EventBus.$on('safari', this.start)
 

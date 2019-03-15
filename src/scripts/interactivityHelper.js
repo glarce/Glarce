@@ -16,7 +16,7 @@ export default function()
         {}
       }
     },
-    init: function()
+    init()
     {
       // =============================
       // === Variable declarations ===
@@ -26,7 +26,7 @@ export default function()
       this.el = document.getElementById(`marker${this.data.vidId}`)
 
       // set toggle to false
-      this.toggle = false;
+      this.toggle = false
       // set should play to true
       this.shouldPlay = true
 
@@ -61,9 +61,9 @@ export default function()
         if (this.data.vidId == id)
         {
           // Toggle play state with hacky event code
-          var event = document.createEvent('HTMLEvents');
-          event.initEvent('change', true, false);
-          window.dispatchEvent(event);
+          var event = document.createEvent('HTMLEvents')
+          event.initEvent('change', true, false)
+          window.dispatchEvent(event)
         }
       }.bind(this)
 
@@ -94,7 +94,7 @@ export default function()
       // Safari event
       let safariDone = function(id)
       {
-        if (this.data.vidId == id)
+        if (this.data.vidId === id)
         {
           console.info(`${this.data.vidId} handeler: Enabling video for safari`)
 
@@ -116,7 +116,7 @@ export default function()
       // Safari done
       EventBus.$on('safariDone', (id) => safariDone(id))
     },
-    togglePlay: function()
+    togglePlay()
     {
       if (this.shouldPlay)
       {
@@ -129,10 +129,10 @@ export default function()
         this.toggle = false
       }
     },
-    tick: function()
+    tick()
     {
       // If the object is visible
-      if (this.el.object3D.visible == true)
+      if (this.el.object3D.visible === true)
       {
         // If it should play and hasn't toggled and safari wait
         if (!this.toggle && !this.safariWait && this.shouldPlay)
@@ -175,7 +175,7 @@ export default function()
         if (!this.interactive[i].executed)
         {
           // if the time point is within the time specified
-          if (this.interactive[i].sec == time)
+          if (this.interactive[i].sec === time)
           {
             // Pause the video
             this.vid.pause()
@@ -183,7 +183,7 @@ export default function()
             this.shouldPlay = false
 
             // Type end
-            if (this.interactive[i].type == 'end')
+            if (this.interactive[i].type === 'end')
             {
               // Jump to end
               this.vid.currentTime = this.vid.duration

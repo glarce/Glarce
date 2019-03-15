@@ -19,16 +19,16 @@
 </template>
 
 <script>
-let marker = require("./app.json");
-let dev = process.env.NODE_ENV === "development";
-import barcodeHelper from "./components/barcodeHelper.vue";
+let marker = require("./app.json")
+let dev = process.env.NODE_ENV === "development"
+import barcodeHelper from "./components/barcodeHelper.vue"
 import Safari from "./components/safari.vue"
 
 import interactivityHelper from './scripts/interactivityHelper'
 
 export default
 {
-  name: "app",
+  name: 'app',
   components:
   {
     barcodeHelper,
@@ -38,10 +38,10 @@ export default
   {
     return {
       markers: marker,
-      dev: process.env.NODE_ENV === "development"
+      dev: process.env.NODE_ENV === 'development'
     };
   },
-  mounted: function()
+  mounted()
   {
     interactivityHelper()
 
@@ -49,13 +49,13 @@ export default
     document.querySelector('a-scene').addEventListener('loaded', this.orientation)
 
     // Future orientation changes
-    window.addEventListener("orientationchange", this.orientation)
+    window.addEventListener('orientationchange', this.orientation)
   },
   methods:
   {
-    orientation: function()
+    orientation()
     {
-      console.log('orientation change!');
+      console.log('orientation change!')
 
       setTimeout(function()
       {
@@ -72,7 +72,7 @@ export default
       }, 20)
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

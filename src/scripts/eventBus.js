@@ -1,7 +1,7 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
-const EventBus = new Vue();
+const EventBus = new Vue()
 
 EventBus.$on('loadInteractive', (id) => console.log(`Interactive event: ${id}`))
 
-export default EventBus;
+export default EventBus

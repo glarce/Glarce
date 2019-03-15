@@ -27,7 +27,7 @@ class Glarce
 `
     ))
 
-    this.buildLength = 0;
+    this.buildLength = 0
     this.getBuilds = []
 
     this.json = []
@@ -39,11 +39,12 @@ class Glarce
     {
       case 'publicPath':
         if (process.env.production) process.env.publicPath = variable
-        break;
+        break
       case 'devPublicPath':
         if (!process.env.production) process.env.publicPath = variable
+        break
       default:
-        break;
+        break
     }
   }
 
@@ -52,15 +53,13 @@ class Glarce
     this.buildLength++
 
     this.getBuilds[this.getBuilds.length] = {
-      string: string,
-      funct: funct
+      string,
+      funct
     }
   }
 
   build()
   {
-    const getLenght = this.getBuilds.lenght
-
     for (var i = 0; i < this.getBuilds.length; i++)
     {
       const build = this.getBuilds[i]
@@ -88,8 +87,8 @@ class Glarce
     info('')
 
     // Set terminal commands
-    var flags = "serve --https"
-    if (process.env.production) flags = "build"
+    var flags = 'serve --https'
+    if (process.env.production) flags = 'build'
 
     info(chalk.green('Saving JSON'))
     fs.writeFileSync('./node_modules/Glarce/src/app.json', JSON.stringify(this.json))
