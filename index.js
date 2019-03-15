@@ -11,7 +11,7 @@ const Res = require('./lib/res').Res
 const resHandlers = require('./lib/res').handlers
 
 // Quicker programing variables
-let info = console.info
+const info = console.info
 
 class Glarce
 {
@@ -60,7 +60,7 @@ class Glarce
 
   build()
   {
-    for (var i = 0; i < this.getBuilds.length; i++)
+    for (let i = 0; i < this.getBuilds.length; i++)
     {
       const build = this.getBuilds[i]
 
@@ -87,7 +87,7 @@ class Glarce
     info('')
 
     // Set terminal commands
-    var flags = 'serve --https'
+    let flags = 'serve --https'
     if (process.env.production) flags = 'build'
 
     info(chalk.green('Saving JSON'))

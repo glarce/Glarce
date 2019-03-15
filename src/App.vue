@@ -57,7 +57,7 @@ export default
     {
       console.log('orientation change!')
 
-      setTimeout(()=>
+      setTimeout(() =>
       {
         if (window.innerHeight > window.innerWidth)
         { // Is portrait

@@ -62,7 +62,7 @@ export default function()
         if (this.data.vidId === id)
         {
           // Toggle play state with hacky event code
-          var event = document.createEvent('HTMLEvents')
+          const event = document.createEvent('HTMLEvents')
           event.initEvent('change', true, false)
           window.dispatchEvent(event)
         }
@@ -132,7 +132,15 @@ export default function()
     },
     tick()
     {
-      // If the object is visible
+      // Visibility manager
+      this.objectVisibility()
+
+      // Manage interactive systems
+      this.interactiveManager()
+    },
+    objectVisibility: function()
+    {
+      // If it is visible
       if (this.el.object3D.visible === true)
       {
         // If it should play and hasn't toggled and safari wait
@@ -163,14 +171,16 @@ export default function()
           this.vid.pause()
         }
       }
-
+    },
+    interactiveManager: function()
+    {
       // Get the video time in seconds
       const time = Math.floor(this.vid.currentTime)
       // Get the amount of interactives that exist
       const interactiveLength = this.interactive.length
 
       // list interactives
-      for (var i = 0; i < interactiveLength; i++)
+      for (let i = 0; i < interactiveLength; i++)
       {
         // don't run if this has already been executed
         if (!this.interactive[i].executed)
