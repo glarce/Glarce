@@ -110,7 +110,7 @@ class Glarce
 
     shell.exec(`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${flags}`,
     {
-      cwd: "node_modules/Glarce"
+      cwd: 'node_modules/Glarce'
     })
 
     info('')
