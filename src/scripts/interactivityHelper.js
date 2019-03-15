@@ -1,3 +1,4 @@
+/* global AFRAME */
 import EventBus from './eventBus'
 
 export default function()
@@ -70,7 +71,7 @@ export default function()
       // Jump while in event
       let jump = function(id, time)
       {
-        if (this.data.vidId == id)
+        if (this.data.vidId === id)
         {
           this.vid.currentTime = time
         }

@@ -120,7 +120,7 @@ class Glarce
     }, err =>
     {
       if (err) return console.error(chalk.bold.red(err))
-    });
+    })
   }
 }
 

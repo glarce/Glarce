@@ -19,10 +19,10 @@
 </template>
 
 <script>
-let marker = require("./app.json")
-let dev = process.env.NODE_ENV === "development"
-import barcodeHelper from "./components/barcodeHelper.vue"
-import Safari from "./components/safari.vue"
+let marker = require('./app.json')
+let dev = process.env.NODE_ENV === 'development'
+import barcodeHelper from './components/barcodeHelper.vue'
+import Safari from './components/safari.vue'
 
 import interactivityHelper from './scripts/interactivityHelper'
 
@@ -39,7 +39,7 @@ export default
     return {
       markers: marker,
       dev: process.env.NODE_ENV === 'development'
-    };
+    }
   },
   mounted()
   {
