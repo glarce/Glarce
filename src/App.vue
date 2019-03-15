@@ -19,8 +19,8 @@
 </template>
 
 <script>
-let marker = require('./app.json')
-let dev = process.env.NODE_ENV === 'development'
+const marker = require('./app.json')
+const dev = process.env.NODE_ENV === 'development'
 import barcodeHelper from './components/barcodeHelper.vue'
 import Safari from './components/safari.vue'
 
@@ -57,7 +57,7 @@ export default
     {
       console.log('orientation change!')
 
-      setTimeout(function()
+      setTimeout(()=>
       {
         if (window.innerHeight > window.innerWidth)
         { // Is portrait

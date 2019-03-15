@@ -59,7 +59,7 @@ export default function()
       // Play vidoo after event is triggured
       let playVid = function(id)
       {
-        if (this.data.vidId == id)
+        if (this.data.vidId === id)
         {
           // Toggle play state with hacky event code
           var event = document.createEvent('HTMLEvents')

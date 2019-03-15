@@ -13,8 +13,7 @@ import EventBus from '../scripts/eventBus.js'
 export default
 {
   name: 'safari',
-  data: () =>
-  {
+  data: () => {
     return {
       display: false,
       currentId: 0
