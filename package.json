@@ -4,9 +4,8 @@
   "private": true,
   "main": "server/Glarce.js",
   "scripts": {
-    "test": "cd ../examples/dev & yarn install --force & yarn serve",
-    "testBuild": "cd ../examples/dev & yarn install --force & yarn build",
-    "travis": "cd ../examples/dev && yarn install --force && yarn build"
+    "test": "cd ../examples/dev && yarn install --force && yarn serve",
+    "testBuild": "cd ../examples/dev && yarn install --force && yarn build"
   },
   "dependencies": {
     "chalk": "^2.4.2",
