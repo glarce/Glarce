@@ -6,6 +6,7 @@
   "scripts": {
     "test": "cd ../examples/dev & yarn install --force & yarn serve",
     "testBuild": "cd ../examples/dev & yarn install --force & yarn build",
+    "testMac": "cd ../examples/dev && yarn install --force && yarn build",
     "travis": "cd ../examples/dev && yarn install --force && yarn build"
   },
   "dependencies": {
