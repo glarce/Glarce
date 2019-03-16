@@ -12,32 +12,32 @@
 </template>
 
 <script>
-import EventBus from '../../scripts/eventBus';
+import EventBus from '../../scripts/eventBus'
 
 export default
 {
   name: 'alert',
   props: ['vidId', 'data'],
-  data: function()
+  data()
   {
     let data = this.data
 
     let btnText = 'Ok'
 
-    if (this.data.button != undefined)
+    if (typeof this.data.button !== 'undefined')
     {
       btnText = this.data.button
     }
 
     return {
-      btnText: btnText,
+      btnText,
       display: false,
       id: this.data.id
     }
   },
   methods:
   {
-    play: function()
+    play()
     {
       console.log(`${this.id}: Playing video`)
 
@@ -48,9 +48,9 @@ export default
 
       EventBus.$emit('play', this.vidId)
     },
-    loadInteractive: function(id)
+    loadInteractive(id)
     {
-      if (id == this.id)
+      if (id === this.id)
       {
         console.log(`${this.id}: Triggured`)
 
@@ -58,7 +58,7 @@ export default
       }
     }
   },
-  mounted: function()
+  mounted()
   {
     console.log(`${this.id}: Mounting`)
 

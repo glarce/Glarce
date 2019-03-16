@@ -13,8 +13,7 @@ import EventBus from '../scripts/eventBus.js'
 export default
 {
   name: 'safari',
-  data: () =>
-  {
+  data(){
     return {
       display: false,
       currentId: 0
@@ -22,7 +21,7 @@ export default
   },
   methods:
   {
-    start: function(id)
+    start(id)
     {
       console.info(`Safari Handeler Frontend: Changing to ${id}`)
 
@@ -30,7 +29,7 @@ export default
 
       this.display = true
     },
-    tap: function()
+    tap()
     {
       if (this.display)
       {
@@ -41,7 +40,7 @@ export default
       }
     }
   },
-  mounted: function()
+  mounted()
   {
     EventBus.$on('safari', this.start)
 

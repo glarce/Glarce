@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import videoHelper from "./videoHelper.vue";
+import videoHelper from './videoHelper.vue'
 import interactivityLoader from './interactivityLoader.vue'
 
 export default
 {
-  name: "barcodeHelper",
+  name: 'barcodeHelper',
   props: ['index', 'barcodeData'],
   components:
   {

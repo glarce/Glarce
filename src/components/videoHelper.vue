@@ -5,7 +5,7 @@
 <script>
 export default
 {
-  name: "videoHelper",
+  name: 'videoHelper',
   props: ['index', 'videoData']
 }
 </script>
