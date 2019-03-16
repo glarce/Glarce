@@ -16,6 +16,15 @@ Vue.use(MdDialog)
 
 Vue.config.productionTip = false
 
+
+Vue.config.ignoredElements = [
+  'a-scene',
+  'a-assets',
+  'a-marker',
+  'a-video',
+  'a-entity'
+]
+
 new Vue(
 {
   render: h => h(App),
