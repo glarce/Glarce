@@ -1,24 +1,17 @@
 /* global AFRAME */
 import EventBus from './eventBus'
 
-export default function()
-{
-  AFRAME.registerComponent('interactivity-helper',
-  {
-    schema:
-    {
-      vidId:
-      {
+export default function () {
+  AFRAME.registerComponent('interactivity-helper', {
+    schema: {
+      vidId: {
         type: 'string'
       },
-      interactivity:
-      {
-        defult:
-        {}
+      interactivity: {
+        defult: {}
       }
     },
-    init()
-    {
+    init() {
       // =============================
       // === Variable declarations ===
       // =============================
@@ -44,8 +37,7 @@ export default function()
       this.tick = AFRAME.utils.throttleTick(this.tick, 200, this)
 
       // Safari handeler and setting shouldPlay
-      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))
-      {
+      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
         // Safari wait
         this.safariWait = true
         // Safari event sent
@@ -57,10 +49,8 @@ export default function()
       // =======================
 
       // Play vidoo after event is triggured
-      let playVid = function(id)
-      {
-        if (this.data.vidId === id)
-        {
+      let playVid = function (id) {
+        if (this.data.vidId === id) {
           // Toggle play state with hacky event code
           const event = document.createEvent('HTMLEvents')
           event.initEvent('change', true, false)
@@ -69,34 +59,21 @@ export default function()
       }.bind(this)
 
       // Jump while in event
-      let jump = function(id, time)
-      {
-        if (this.data.vidId === id)
-        {
+      let jump = function (id, time) {
+        if (this.data.vidId === id) {
           this.vid.currentTime = time
         }
       }.bind(this)
 
       // Play / pause the video on tap
-      let tap = function()
-      {
-        if (this.shouldPlay)
-        {
-          this.shouldPlay = false
-          this.toggle = true
-        }
-        else
-        {
-          this.shouldPlay = true
-          this.toggle = false
-        }
+      let tap = function () {
+        this.shouldPlay = !this.shouldPlay
+        this.toggle = !this.shouldPlay
       }.bind(this)
 
       // Safari event
-      let safariDone = function(id)
-      {
-        if (this.data.vidId === id)
-        {
+      let safariDone = function (id) {
+        if (this.data.vidId === id) {
           console.info(`${this.data.vidId} handeler: Enabling video for safari`)
 
           // Tell program that safari is dealt with
@@ -117,35 +94,18 @@ export default function()
       // Safari done
       EventBus.$on('safariDone', (id) => safariDone(id))
     },
-    togglePlay()
-    {
-      if (this.shouldPlay)
-      {
-        this.shouldPlay = false
-        this.toggle = true
-      }
-      else
-      {
-        this.shouldPlay = true
-        this.toggle = false
-      }
-    },
-    tick()
-    {
+    tick() {
       // Visibility manager
       this.objectVisibility()
 
       // Manage interactive systems
       this.interactiveManager()
     },
-    objectVisibility()
-    {
+    objectVisibility() {
       // If it is visible
-      if (this.el.object3D.visible === true)
-      {
+      if (this.el.object3D.visible === true) {
         // If it should play and hasn't toggled and safari wait
-        if (!this.toggle && !this.safariWait && this.shouldPlay)
-        {
+        if (!this.toggle && !this.safariWait && this.shouldPlay) {
           // Set toggle to true
           this.toggle = true
 
@@ -153,8 +113,7 @@ export default function()
           this.vid.play()
         }
         // Send safari event when visible
-        else if (this.safariWait && !this.safariEvent)
-        {
+        else if (this.safariWait && !this.safariEvent) {
           // Send safari event
           EventBus.$emit('safari', this.data.vidId)
           // Safari event sent
@@ -162,56 +121,53 @@ export default function()
         }
       }
       // If it is not visible
-      else
-      {
+      else {
         // Only truggure if toggle hasn't been triggered on pause cycle (potential speed improvments)
-        if (this.toggle)
-        {
+        if (this.toggle) {
           this.toggle = false
           this.vid.pause()
         }
       }
     },
-    interactiveManager()
-    {
+    interactiveManager() {
       // Get the video time in seconds
       const time = Math.floor(this.vid.currentTime)
       // Get the amount of interactives that exist
-      const interactiveLength = this.interactive.length
-
-      // list interactives
-      for (let i = 0; i < interactiveLength; i++)
+      if(time === Math.floor(this.vid.duration))
       {
-        // don't run if this has already been executed
-        if (!this.interactive[i].executed)
+        for (let i = 0; i < this.interactive.length; i++)
         {
-          // if the time point is within the time specified
-          if (this.interactive[i].sec === time)
-          {
-            // Pause the video
-            this.vid.pause()
-            // set should play to false
-            this.shouldPlay = false
+          this.interactive[i].executed = false
+        }
+        this.vid.currentTime = 0
+        this.vid.play()
+        this.shouldPlay = true
+      }
+      // list interactives
+      for (let i = 0; i < this.interactive.length; i++) {
+        // don't run if this has already been executed and run if the time point is within the time specified
+        if (!this.interactive[i].executed && this.interactive[i].sec === time) {
+          // Pause the video
+          this.vid.pause()
+          // set should play to false
+          this.shouldPlay = false
 
-            // Type end
-            if (this.interactive[i].type === 'end')
-            {
-              // Jump to end
-              this.vid.currentTime = this.vid.duration
-            }
-            // If it is something else
-            else
-            {
-              // Pause A-scene
-              document.querySelector('a-scene').pause()
-
-              // Send it to interactive components
-              EventBus.$emit('loadInteractive', this.interactive[i].id)
-            }
-
-            // Set it to have executed
-            this.interactive[i].executed = true
+          // Type end
+          if (this.interactive[i].type === 'end') {
+            // Jump to end
+            this.vid.currentTime = this.vid.duration
           }
+          // If it is something else
+          else {
+            // Pause A-scene
+            document.querySelector('a-scene').pause()
+
+            // Send it to interactive components
+            EventBus.$emit('loadInteractive', this.interactive[i].id)
+          }
+
+          // Set it to have executed
+          this.interactive[i].executed = true
         }
       }
     }
