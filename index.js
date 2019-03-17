@@ -1,22 +1,20 @@
 // Important libraries
-const fs = require('fs-extra')
-const shell = require('shelljs')
+let fs = require('fs-extra')
+let shell = require('shelljs')
 
 // Styling libraries
-const chalk = require('chalk')
-const _cliProgress = require('cli-progress')
+let chalk = require('chalk')
+let _cliProgress = require('cli-progress')
 
 // Res and its hadnelers
-const Res = require('./lib/res').Res
-const resHandlers = require('./lib/res').handlers
+let Res = require('./lib/res').Res
+let resHandlers = require('./lib/res').handlers
 
 // Quicker programing variables
 const info = console.info
 
-class Glarce
-{
-  constructor()
-  {
+class Glarce {
+  constructor() {
     console.log('\x1Bc')
     info(chalk.cyan(
       `======================
@@ -33,23 +31,37 @@ class Glarce
     this.json = []
   }
 
-  set(input, variable)
-  {
-    switch (input)
-    {
+  /**
+   *  publicPath:
+   *  Sets the path for production.
+   *  app.set('publicPath', '/myPublicPath/')
+   *
+   *  devPublicPath:
+   *  Sets the defult path for the development server
+   *  app.set('devPublicPath', '/myDevPath/')
+   *
+   *  server:
+   *  Sets up a server acording to the config you put in. Read the offical documentation on gitbooks
+   *  app.set('server', confing)
+   */
+  set(input, variable) {
+    switch (input) {
       case 'publicPath':
         if (process.env.production) process.env.publicPath = variable
         break
       case 'devPublicPath':
         if (!process.env.production) process.env.publicPath = variable
         break
+      case 'server':
+        this.server = variable;
+        break
       default:
+        console.error(chalk.red.bold(`'${input}' is not a recognised set command`))
         break
     }
   }
 
-  get(string, funct)
-  {
+  get(string, funct) {
     this.buildLength++
 
     this.getBuilds[this.getBuilds.length] = {
@@ -58,10 +70,8 @@ class Glarce
     }
   }
 
-  build()
-  {
-    for (let i = 0; i < this.getBuilds.length; i++)
-    {
+  build() {
+    for (let i = 0; i < this.getBuilds.length; i++) {
       const build = this.getBuilds[i]
 
       resHandlers.increseIndex()
@@ -71,10 +81,8 @@ class Glarce
     }
   }
 
-  start()
-  {
-    this.bar = new _cliProgress.Bar(
-    {}, _cliProgress.Presets.shades_classic)
+  start() {
+    this.bar = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic)
     this.bar.start(this.buildLength, 0)
 
     // Build
@@ -95,32 +103,60 @@ class Glarce
 
     info('')
 
-    if (process.env.production)
-    {
+    if (process.env.production) {
       info(chalk.green('Running build!'))
-    }
-    else
-    {
+    } else {
       info(chalk.red('Starting a dev server'))
       info(chalk.bold.red('DO NOT USE THIS FOR PRODUCTION'))
     }
 
     info('')
 
-    shell.exec(`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${flags}`,
-    {
+    shell.exec(`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${flags}`, {
       cwd: 'node_modules/Glarce'
     })
 
     info('')
     info(chalk.green('Moving build files to ./dist/'))
-    fs.move('./node_modules/Glarce/dist', './dist/',
-    {
+    fs.move('./node_modules/Glarce/dist', './dist/', {
       overwrite: true
-    }, err =>
-    {
+    }, err => {
       if (err) return console.error(chalk.bold.red(err))
     })
+
+    if (this.server)
+      this.startServer()
+  }
+
+  /**
+   * INTERNAL FUNCTION, DO NOT CALL
+   * Cleans up memory and prepares server
+   */
+  startServer() {
+    // ===============
+    // Clean up memory
+    // ===============
+
+    delete this.bar
+    delete this.buildLength
+    delete this.getBuilds
+    delete this.json
+
+    fs = null
+    shell = null
+    _cliProgress = null
+    Res = null
+    resHandlers = null
+
+    console.log('\x1Bc')
+    info(chalk.green('Memory cleared'))
+
+    // ============
+    // Start server
+    // ============
+    const Ws = require('./lib/webServer')
+
+    this.server = new Ws(this.server)
   }
 }
 
