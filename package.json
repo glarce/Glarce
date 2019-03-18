@@ -12,6 +12,7 @@
     "chalk": "^2.4.2",
     "cli-progress": "^2.1.1",
     "create-symlink": "^1.0.0",
+    "mime-types": "^2.1.22",
     "register-service-worker": "^1.5.2",
     "shelljs": "^0.8.3",
     "symlink-dir": "^2.0.2",

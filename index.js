@@ -53,7 +53,7 @@ class Glarce {
         if (!process.env.production) process.env.publicPath = variable
         break
       case 'server':
-        this.server = variable;
+        this.server = variable
         break
       default:
         console.error(chalk.red.bold(`'${input}' is not a recognised set command`))
