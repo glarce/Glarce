@@ -142,11 +142,7 @@ class Glarce {
     delete this.getBuilds
     delete this.json
 
-    fs = null
-    shell = null
-    _cliProgress = null
-    Res = null
-    resHandlers = null
+    fs, shell, _cliProgress, Res, resHandlers = null
 
     console.log('\x1Bc')
     info(chalk.green('Memory cleared'))
