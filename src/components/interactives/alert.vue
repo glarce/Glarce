@@ -20,7 +20,7 @@ export default
   props: ['vidId', 'data'],
   data()
   {
-    let data = this.data
+    const data = this.data
 
     let btnText = 'Ok'
 

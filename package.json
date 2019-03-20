@@ -5,13 +5,17 @@
   "main": "server/Glarce.js",
   "scripts": {
     "test": "cd ../examples/dev && yarn install --force && yarn serve",
-    "testBuild": "cd ../examples/dev && yarn install --force && yarn build"
+    "testBuild": "cd ../examples/dev && yarn install --force && yarn build",
+    "testServer": "cd ../examples/wsServer && yarn install --force && yarn build"
   },
   "dependencies": {
     "chalk": "^2.4.2",
     "cli-progress": "^2.1.1",
     "create-symlink": "^1.0.0",
+    "links-on-terminal": "^1.0.1",
+    "mime-types": "^2.1.22",
     "register-service-worker": "^1.5.2",
+    "selfsigned": "^1.10.4",
     "shelljs": "^0.8.3",
     "symlink-dir": "^2.0.2",
     "vue": "^2.5.22",
