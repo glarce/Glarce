@@ -1,7 +1,7 @@
 /* global AFRAME */
 import EventBus from './eventBus'
 
-export default function () {
+export default function() {
   AFRAME.registerComponent('interactivity-helper', {
     schema: {
       vidId: {
@@ -49,7 +49,7 @@ export default function () {
       // =======================
 
       // Play vidoo after event is triggured
-      let playVid = function (id) {
+      let playVid = function(id) {
         if (this.data.vidId === id) {
           // Toggle play state with hacky event code
           const event = document.createEvent('HTMLEvents')
@@ -59,20 +59,20 @@ export default function () {
       }.bind(this)
 
       // Jump while in event
-      let jump = function (id, time) {
+      let jump = function(id, time) {
         if (this.data.vidId === id) {
           this.vid.currentTime = time
         }
       }.bind(this)
 
       // Play / pause the video on tap
-      let tap = function () {
+      let tap = function() {
         this.shouldPlay = !this.shouldPlay
         this.toggle = !this.shouldPlay
       }.bind(this)
 
       // Safari event
-      let safariDone = function (id) {
+      let safariDone = function(id) {
         if (this.data.vidId === id) {
           console.info(`${this.data.vidId} handeler: Enabling video for safari`)
 
@@ -88,11 +88,11 @@ export default function () {
 
       // === EventBus ===
       // On play triggure play
-      EventBus.$on('play', (id) => playVid(id))
+      EventBus.$on('play', id => playVid(id))
       // Jump to second
-      EventBus.$on('jump', (data) => jump(data.id, data.sec))
+      EventBus.$on('jump', data => jump(data.id, data.sec))
       // Safari done
-      EventBus.$on('safariDone', (id) => safariDone(id))
+      EventBus.$on('safariDone', id => safariDone(id))
     },
     tick() {
       // Visibility manager
@@ -133,10 +133,8 @@ export default function () {
       // Get the video time in seconds
       const time = Math.floor(this.vid.currentTime)
       // Get the amount of interactives that exist
-      if(time === Math.floor(this.vid.duration))
-      {
-        for (let i = 0; i < this.interactive.length; i++)
-        {
+      if (time === Math.floor(this.vid.duration)) {
+        for (let i = 0; i < this.interactive.length; i++) {
           this.interactive[i].executed = false
         }
         this.vid.currentTime = 0
