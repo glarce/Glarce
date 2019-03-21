@@ -1,0 +1,19 @@
+image:
+  - Visual Studio 2017
+
+environment:
+  nodejs_version: Current
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - yarn
+  - cd ..
+  - git clone --depth=1 https://github.com/glarce/examples.git
+  - cd Glarce
+
+
+test_script:
+  - node --version
+  - npm --version
+  - yarn --version
+  - yarn testBuild
