@@ -17,5 +17,5 @@ deploy:
   provider: pages
   github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
   on:
-    condition: $LINUX_DEPLOY = "true"
+    condition: $TRAVIS_OS_NAME = "linux"
     branch: master
