@@ -1,8 +1,9 @@
 <template>
-<a-marker v-if="barcodeData.contentType == 'video'" type='barcode' :value='barcodeData.scan' :id="'marker' + barcodeData.videoData.id">
-  <videoHelper :index="index" :videoData="barcodeData.videoData" :interactivity-helper="`vidId: ${barcodeData.videoData.id}; interactivity: ${JSON.stringify(barcodeData.videoData.interactive)}`" />
+<a-marker type='barcode' :value='barcodeData.scan' :id="'marker' + barcodeData.videoData.id">
+  <videoHelper v-if="barcodeData.contentType === 'video'" :index="index" :videoData="barcodeData.videoData" :interactivity-helper="`vidId: ${barcodeData.videoData.id}; interactivity: ${JSON.stringify(barcodeData.videoData.interactive)}`" />
+  <rawHelper v-if="barcodeData.contentType === 'aframe'" :aframe="barcodeData.aframeData" />
 
-  <div v-for="(inter, index) in barcodeData.videoData.interactive">
+  <div v-if="barcodeData.contentType === 'video'" v-for="(inter, index) in barcodeData.videoData.interactive">
     <interactivity-loader :key="index" :name="index" :vidId="barcodeData.videoData.id" :data="inter" />
   </div>
 </a-marker>
@@ -11,6 +12,7 @@
 <script>
 import videoHelper from './videoHelper.vue'
 import interactivityLoader from './interactivityLoader.vue'
+import rawHelper from './rawHelper.vue'
 
 export default
 {
@@ -19,7 +21,8 @@ export default
   components:
   {
     videoHelper,
-    interactivityLoader
+    interactivityLoader,
+    rawHelper
   }
 }
 </script>

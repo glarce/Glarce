@@ -3,10 +3,12 @@
   <safari />
 
   <a-assets>
-    <slot v-for="(vid, index) in markers">
-      <video v-if="vid.contentType == 'video'" preload="auto" :id="'vid'+vid.videoData.id" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls>
-        <source v-for="(vidSrc, index) in vid.videoData.vids" :type="'video/'+vidSrc.extension" :src="vidSrc.url">
+    <slot v-for="(media, index) in markers">
+      <video v-if="media.contentType == 'video'" preload="auto" :id="'vid'+media.videoData.id" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls>
+        <source v-for="(vidSrc, index) in media.videoData.vids" :type="'video/'+vidSrc.extension" :src="vidSrc.url">
       </video>
+
+      <slot v-if="media.contentType === 'aframe'" v-html="media.aframeData.assets"></slot>
     </slot>
   </a-assets>
   <slot v-for="(marker, index) in markers">
@@ -19,7 +21,6 @@
 </template>
 
 <script>
-const marker = require('./app.json')
 const dev = process.env.NODE_ENV === 'development'
 import barcodeHelper from './components/barcodeHelper.vue'
 import Safari from './components/safari.vue'
@@ -36,8 +37,10 @@ export default
   },
   data()
   {
+    const markers = require('./app.json')
+
     return {
-      markers: marker,
+      markers: markers,
       dev: process.env.NODE_ENV === 'development'
     }
   },
