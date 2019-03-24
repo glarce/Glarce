@@ -173,4 +173,3 @@ class Glarce
 }
 
 module.exports = Glarce
-export default Glarce
