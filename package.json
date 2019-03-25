@@ -4,11 +4,10 @@
   "private": true,
   "main": "server/Glarce.js",
   "scripts": {
-    "test": "cd ../examples/dev && yarn install --force && yarn serve",
-    "testBuild": "cd ../examples/dev && yarn install --force && yarn build",
-    "testServer": "cd ../examples/wsServer && yarn install --force && yarn build"
+    "test": "cd ../tests && yarn test"
   },
   "dependencies": {
+    "autoprefixer": "^9.5.0",
     "chalk": "^2.4.2",
     "cli-progress": "^2.1.1",
     "create-symlink": "^1.0.0",
