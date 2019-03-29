@@ -7,7 +7,7 @@
     "test": "cd ../examples/dev && yarn install --force && yarn serve",
     "testBuild": "cd ../examples/dev && yarn install --force && yarn build",
     "testServer": "cd ../examples/wsServer && yarn install --force && yarn build",
-    "postinstall": "npm install"
+    "postinstall": "node install.js"
   },
   "dependencies": {
     "chalk": "^2.4.2",
