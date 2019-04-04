@@ -1,9 +1,12 @@
 <template>
 <a-marker v-if="barcodeData.contentType === 'video'" type='barcode' :value='barcodeData.scan' :id="markerID">
-  <videoHelper :index="index" :videoData="barcodeData.videoData" :interactivity-helper="`vidId: ${barcodeData.videoData.id}; interactivity: ${JSON.stringify(barcodeData.videoData.interactive)}`" />
+  <videoHelper v-if="barcodeData.videoData.interactive" :index="index" :videoData="barcodeData.videoData" :interactivity-helper="`vidId: ${barcodeData.videoData.id}; interactivity: ${JSON.stringify(barcodeData.videoData.interactive)}`" />
+  <videoHelper v-else :index="index" :videoData="barcodeData.videoData" :interactivity-helper="`vidId: ${barcodeData.videoData.id}; interactivity: ${JSON.stringify([])}`" />~
 
-  <div v-for="(inter, index) in barcodeData.videoData.interactive" :key="index">
-    <interactivity-loader :key="index" :name="index" :vidId="barcodeData.videoData.id" :data="inter" />
+  <div v-if="barcodeData.videoData.interactive">
+    <div v-for="(inter, index) in barcodeData.videoData.interactive" :key="index">
+      <interactivity-loader :key="index" :name="index" :vidId="barcodeData.videoData.id" :data="inter" />
+    </div>
   </div>
 </a-marker>
 
