@@ -86,7 +86,6 @@ class Glarce
     {
       const build = this.getBuilds[i]
 
-      resHandlers.increseIndex()
       build.funct(new Res(build.string))
 
       this.bar.update(i + 1)
