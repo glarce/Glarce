@@ -10,6 +10,9 @@ let _cliProgress = require('cli-progress')
 let Res = require('./lib/res').Res
 let resHandlers = require('./lib/res').handlers
 
+// Fucntions
+const funcs = require('./lib/functions')
+
 // Quicker programing variables
 const info = console.info
 
@@ -31,6 +34,8 @@ class Glarce
     this.getBuilds = []
 
     this.json = []
+
+    funcs.linkMediaFolder()
   }
 
   /**

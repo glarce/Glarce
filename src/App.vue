@@ -3,12 +3,12 @@
   <safari />
 
   <a-assets>
-    <slot v-for="(media, index) in markers">
-      <video v-if="media.contentType == 'video'" preload="auto" :id="'vid'+media.videoData.id" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls>
-        <source v-for="(vidSrc, index) in media.videoData.vids" :type="'video/'+vidSrc.extension" :src="vidSrc.url">
+    <slot v-for="(media) in markers">
+      <video v-if="media.contentType == 'video'" :key="media.videoData.id" preload="auto" :id="'vid'+media.videoData.id" class="vidh" loop="true" crossorigin webkit-playsinline playsinline controls>
+        <source v-for="(vidSrc, index) in media.videoData.vids" :key="index" :type="'video/'+vidSrc.extension" :src="vidSrc.url">
       </video>
 
-      <slot v-if="media.contentType === 'aframe'" v-html="media.aframeData.assets"></slot>
+      <slot v-else-if="media.contentType === 'aframe'" v-html="media.aframeData.assets"></slot>
     </slot>
   </a-assets>
   <slot v-for="(marker, index) in markers">
