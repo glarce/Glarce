@@ -1,6 +1,5 @@
 // Important libraries
 let fs = require('fs-extra')
-let shell = require('shelljs')
 
 // Styling libraries
 let chalk = require('chalk')
@@ -112,20 +111,30 @@ class Glarce {
 
     info('')
 
-    shell.exec(`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${flags}`, {
-      cwd: 'node_modules/Glarce'
     })
+    let Vue = require('./node_modules/@vue/cli-service/lib/Service')
+    let vue = new Vue(__dirname)
 
-    info('')
-    info(chalk.green('Moving build files to ./dist/'))
-    fs.move('./node_modules/Glarce/dist', './dist/', {
-      overwrite: true
-    }, err => {
-      if (err) return console.error(chalk.bold.red(err))
+    vue.run(process.env.production ? 'build' : 'serve', {
+      https: true
     })
-
-    if (this.server)
-      this.startServer()
+      .then(() => {
+        info('')
+        info(chalk.green('Moving build files to ./dist/'))
+        if (process.env.production === 'build') {
+          fs.move('./node_modules/Glarce/dist', './dist/', {
+            overwrite: true
+          }, err => {
+            if (err) return console.error(chalk.bold.red(err))
+          })
+        }
+        if (this.server)
+          this.startServer()
+      })
+      .catch(err => {
+        console.log(err)
+        process.exit(1)
+      })
   }
 
   /**
