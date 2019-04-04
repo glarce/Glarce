@@ -40,7 +40,7 @@ export default
     const markers = require('./app.json')
 
     return {
-      markers: markers,
+      markers,
       dev: process.env.NODE_ENV === 'development'
     }
   },

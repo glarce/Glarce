@@ -18,27 +18,30 @@ export default
 {
   name: 'barcodeHelper',
   props: ['index', 'barcodeData'],
-  data: function () {
-    let id = `marker${this.barcodeData.id}`
+  data: () =>
+  {
+    const id = `marker${this.barcodeData.id}`
 
     return {
       markerID: id,
-      aframeHTML:''
+      aframeHTML: ''
     }
-  },
+  }.bind(this),
   components:
   {
     videoHelper,
     interactivityLoader
   },
-  mounted: function()
+  mounted: () =>
   {
-    if (this.barcodeData.contentType === 'aframe') 
+    if (this.barcodeData.contentType === 'aframe')
     {
-      this.aframeHTML = this.barcodeData.aframeData.aframe.toString()  
+      this.aframeHTML = this.barcodeData.aframeData.aframe.toString()
 
-      eval(this.barcodeData.aframeData.js)
+      // Run JS
+      const runJS = new Function(this.barcodeData.aframeData.js)
+      runJS()
     }
-  }
+  }.bind(this)
 }
 </script>
