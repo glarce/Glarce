@@ -65,7 +65,7 @@ class Glarce
         this.server = variable
         break
       default:
-        console.error(chalk.red.bold(`'${input}' is not a recognised set command`))
+        throw new Error(chalk.red.bold(`'${input}' is not a recognised set command`))
         break
     }
   }
@@ -140,7 +140,7 @@ class Glarce
       overwrite: true
     }, err =>
     {
-      if (err) return console.error(chalk.bold.red(err))
+      if (err) throw new Error(chalk.bold.red(err))
     })
 
     if (this.server)
