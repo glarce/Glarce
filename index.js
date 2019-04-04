@@ -66,7 +66,6 @@ class Glarce
         break
       default:
         throw new Error(chalk.red.bold(`'${input}' is not a recognised set command`))
-        break
     }
   }
 
