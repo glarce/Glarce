@@ -18,7 +18,7 @@ export default
 {
   name: 'barcodeHelper',
   props: ['index', 'barcodeData'],
-  data: () =>
+  data: function()
   {
     const id = `marker${this.barcodeData.id}`
 
@@ -26,13 +26,13 @@ export default
       markerID: id,
       aframeHTML: ''
     }
-  }.bind(this),
+  },
   components:
   {
     videoHelper,
     interactivityLoader
   },
-  mounted: () =>
+  mounted: function()
   {
     if (this.barcodeData.contentType === 'aframe')
     {
@@ -42,6 +42,6 @@ export default
       const runJS = new Function(this.barcodeData.aframeData.js)
       runJS()
     }
-  }.bind(this)
+  }
 }
 </script>
