@@ -110,8 +110,6 @@ class Glarce {
     }
 
     info('')
-
-    })
     let Vue = require('./node_modules/@vue/cli-service/lib/Service')
     let vue = new Vue(__dirname)
 
