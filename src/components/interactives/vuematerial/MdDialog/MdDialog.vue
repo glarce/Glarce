@@ -24,6 +24,7 @@
 
   export default new MdComponent({
     name: 'MdDialog',
+    components: {
       MdPortal,
       MdOverlay,
       MdFocusTrap
