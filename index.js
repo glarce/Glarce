@@ -1,5 +1,6 @@
 // Important libraries
 let fs = require('fs-extra')
+let { normalize } = require('path')
 let shell = require('shelljs')
 
 // Styling libraries
@@ -16,10 +17,8 @@ const funcs = require('./lib/functions')
 // Quicker programing variables
 const info = console.info
 
-class Glarce
-{
-  constructor()
-  {
+class Glarce {
+  constructor() {
     console.log('\x1Bc')
     info(chalk.cyan(
       `======================
@@ -35,7 +34,12 @@ class Glarce
 
     this.json = []
 
-    funcs.linkMediaFolder()
+    const dirs = funcs.getDirectories('./media/')
+
+    dirs.forEach(item => {
+      fs.ensureSymlinkSync(normalize(`${__dirname}/../../media/${item}`), normalize(`${__dirname}/public/${item}`))
+    })
+
   }
 
   /**
@@ -51,10 +55,8 @@ class Glarce
    *  Sets up a server acording to the config you put in. Read the offical documentation on gitbooks
    *  app.set('server', confing)
    */
-  set(input, variable)
-  {
-    switch (input)
-    {
+  set(input, variable) {
+    switch (input) {
       case 'publicPath':
         if (process.env.production) process.env.publicPath = variable
         break
@@ -69,8 +71,7 @@ class Glarce
     }
   }
 
-  get(string, funct)
-  {
+  get(string, funct) {
     this.buildLength++
 
     this.getBuilds[this.getBuilds.length] = {
@@ -79,10 +80,8 @@ class Glarce
     }
   }
 
-  build()
-  {
-    for (let i = 0; i < this.getBuilds.length; i++)
-    {
+  build() {
+    for (let i = 0; i < this.getBuilds.length; i++) {
       const build = this.getBuilds[i]
 
       build.funct(new Res(build.string))
@@ -91,10 +90,9 @@ class Glarce
     }
   }
 
-  start()
-  {
+  start() {
     this.bar = new _cliProgress.Bar(
-    {}, _cliProgress.Presets.shades_classic)
+      {}, _cliProgress.Presets.shades_classic)
     this.bar.start(this.buildLength, 0)
 
     // Build
@@ -115,12 +113,10 @@ class Glarce
 
     info('')
 
-    if (process.env.production)
-    {
+    if (process.env.production) {
       info(chalk.green('Running build!'))
     }
-    else
-    {
+    else {
       info(chalk.red('Starting a dev server'))
       info(chalk.bold.red('DO NOT USE THIS FOR PRODUCTION'))
     }
@@ -128,19 +124,18 @@ class Glarce
     info('')
 
     shell.exec(`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${flags}`,
-    {
-      cwd: 'node_modules/Glarce'
-    })
+      {
+        cwd: 'node_modules/Glarce'
+      })
 
     info('')
     info(chalk.green('Moving build files to ./dist/'))
     fs.move('./node_modules/Glarce/dist', './dist/',
-    {
-      overwrite: true
-    }, err =>
-    {
-      if (err) throw new Error(chalk.bold.red(err))
-    })
+      {
+        overwrite: true
+      }, err => {
+        if (err) throw new Error(chalk.bold.red(err))
+      })
 
     if (this.server)
       this.startServer()
@@ -150,8 +145,7 @@ class Glarce
    * INTERNAL FUNCTION, DO NOT CALL
    * Cleans up memory and prepares server
    */
-  startServer()
-  {
+  startServer() {
     // ===============
     // Clean up memory
     // ===============
