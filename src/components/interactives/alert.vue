@@ -1,13 +1,13 @@
 <template>
 <div class="md-dialog">
-  <!-- <md-dialog :md-fullscreen="false" :md-active.sync="display" :md-backdrop="false">
+  <md-dialog :md-fullscreen="false" :md-active.sync="display" :md-backdrop="false">
     <md-dialog-title v-if="data.title">{{ data.title }}</md-dialog-title>
     <md-dialog-content v-if="data.text" v-html="data.text" />
 
     <md-dialog-actions>
       <md-button class="md-primary" @click="play()">{{ btnText }}</md-button>
     </md-dialog-actions>
-  </md-dialog> -->
+  </md-dialog> 
 </div>
 </template>
 
