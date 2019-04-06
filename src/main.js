@@ -2,17 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 
-/* imports
+import
 {
   MdButton,
   MdDialog
 }
-from 'vue-material/dist/components'
-import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default-dark.css'
+from './lib/material/components'
+import './lib/material/vue-material.css'
+import './lib/material/theme/default-dark.css'
 
 Vue.use(MdButton)
-Vue.use(MdDialog) */
+Vue.use(MdDialog) 
 
 Vue.config.productionTip = false
 
