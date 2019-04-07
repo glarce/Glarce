@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/Glarce/js/app.9ab19c62.js"
   },
   {
-    "revision": "61877a7638fe8d7e0c2c",
+    "revision": "05a5b91c61a22e68962c",
     "url": "/Glarce/css/chunk-vendors.f4d1286a.css"
   },
   {
-    "revision": "61877a7638fe8d7e0c2c",
-    "url": "/Glarce/js/chunk-vendors.ba2e8a9c.js"
+    "revision": "05a5b91c61a22e68962c",
+    "url": "/Glarce/js/chunk-vendors.0df1a49a.js"
   },
   {
-    "revision": "15271fdca1983969faf1c477566ed1eb",
+    "revision": "6417d65992f849b421621933db206678",
     "url": "/Glarce/index.html"
   },
   {
@@ -28,8 +28,16 @@ self.__precacheManifest = [
     "url": "/Glarce/api.json"
   },
   {
+    "revision": "84e063d455566a8cfc52a5e5406ff246",
+    "url": "/Glarce/models/monkey.mtl"
+  },
+  {
     "revision": "735ab4f94fbcd57074377afca324c813",
     "url": "/Glarce/robots.txt"
+  },
+  {
+    "revision": "dc03866aa2e63ca41d9f091c819a4969",
+    "url": "/Glarce/models/monkey.obj"
   },
   {
     "revision": "ae43d9178075abf8fc02a3419cf574ba",
