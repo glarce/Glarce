@@ -28,65 +28,46 @@
 <script>
 import EventBus from '../../scripts/eventBus'
 
-export default
-{
+export default {
 	name: 'Question',
 	props: ['vidId', 'data'],
-	data()
-	{
+	data() {
 		return {
 			display: false,
 			id: this.data.id
 		}
 	},
-	mounted()
-	{
+	mounted() {
 		console.log(`${this.id}: Mounting`)
-
 		EventBus.$on('loadInteractive', this.loadInteractive)
 	},
-	methods:
-  {
-  	click(index)
-  	{
-  		console.log(index)
-  		console.log(this)
-
-  		const button = this.data.buttons[index]
-
-  		if (typeof button.jumpTo !== 'undefined')
-  		{
-  			console.log(`${this.id}: Jumping to ${button.jumpTo} seconds`)
-
-  			EventBus.$emit('jump',
-  				{
-  					id: this.vidId,
-  					sec: button.jumpTo
-  				})
-  		}
-
-  		this.play()
-  	},
-  	play()
-  	{
-  		console.log(`${this.id}: Playing video`)
-
-  		this.display = false
-
-  		// Start A-scene
-  		document.querySelector('a-scene').play()
-
-  		EventBus.$emit('play', this.vidId)
-  	},
-  	loadInteractive(id)
-  	{
-  		if (id === this.id)
-  		{
-  			console.log(`${this.id}: Triggured`)
-
-  			this.display = true
-  		}
-  	}
-  }
+	methods: {
+		click(index) {
+			console.log(index)
+			console.log(this)
+			const button = this.data.buttons[index]
+			if (typeof button.jumpTo !== 'undefined') {
+				console.log(`${this.id}: Jumping to ${button.jumpTo} seconds`)
+				EventBus.$emit('jump', {
+					id: this.vidId,
+					sec: button.jumpTo
+				})
+			}
+			this.play()
+		},
+		play() {
+			console.log(`${this.id}: Playing video`)
+			this.display = false
+			// Start A-scene
+			document.querySelector('a-scene').play()
+			EventBus.$emit('play', this.vidId)
+		},
+		loadInteractive(id) {
+			if (id === this.id) {
+				console.log(`${this.id}: Triggured`)
+				this.display = true
+			}
+		}
+	}
 }
 </script>

@@ -55,8 +55,7 @@ export default
   	interactivityLoader
   },
 	props: ['index', 'barcodeData'],
-	data: function()
-	{
+	data: function() {
 		const id = `marker${this.barcodeData.id}`
 
 		return {
@@ -64,10 +63,8 @@ export default
 			aframeHTML: ''
 		}
 	},
-	mounted: function()
-	{
-		if (this.barcodeData.contentType === 'aframe')
-		{
+	mounted: function() {
+		if (this.barcodeData.contentType === 'aframe') {
 			this.aframeHTML = this.barcodeData.aframeData.aframe.toString()
 
 			// Run JS

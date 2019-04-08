@@ -52,54 +52,44 @@ import Safari from './components/safari.vue'
 
 import interactivityHelper from './scripts/interactivityHelper'
 
-export default
-{
+export default {
 	name: 'App',
-	components:
-  {
-  	barcodeHelper,
-  	Safari
-  },
-	data()
-	{
+	components: {
+		barcodeHelper,
+		Safari
+	},
+	data() {
 		const markers = require('./app.json')
-
 		return {
 			markers,
 			dev: process.env.NODE_ENV === 'development'
 		}
 	},
-	mounted()
-	{
+	mounted() {
 		interactivityHelper()
-
 		// Load
-		document.querySelector('a-scene').addEventListener('loaded', this.orientation)
-
+		document
+			.querySelector('a-scene')
+			.addEventListener('loaded', this.orientation)
 		// Future orientation changes
 		window.addEventListener('orientationchange', this.orientation)
 	},
-	methods:
-  {
-  	orientation()
-  	{
-  		console.log('orientation change!')
-
-  		setTimeout(() =>
-  		{
-  			if (window.innerHeight > window.innerWidth)
-  			{ // Is portrait
-  				console.log('portrait')
-  				document.querySelector('a-scene').pause()
-  			}
-  			else
-  			{ // Is landscape
-  				console.log('landscape')
-  				document.querySelector('a-scene').play()
-  			}
-  		}, 20)
-  	}
-  }
+	methods: {
+		orientation() {
+			console.log('orientation change!')
+			setTimeout(() => {
+				if (window.innerHeight > window.innerWidth) {
+					// Is portrait
+					console.log('portrait')
+					document.querySelector('a-scene').pause()
+				} else {
+					// Is landscape
+					console.log('landscape')
+					document.querySelector('a-scene').play()
+				}
+			}, 20)
+		}
+	}
 }
 </script>
 
@@ -108,32 +98,32 @@ export default
 #arjsDebugUIContainer,
 #orientation,
 .a-enter-vr {
-    display: none !important;
+  display: none !important;
 }
 
 #orientation {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-@media screen and (orientation:portrait) {
-    #orientation {
-        display: block !important;
+@media screen and (orientation: portrait) {
+  #orientation {
+    display: block !important;
 
-        width: 25%;
-        height: 25%;
+    width: 25%;
+    height: 25%;
 
-        svg {
-            width: 100%;
-            height: 100%;
-        }
+    svg {
+      width: 100%;
+      height: 100%;
     }
+  }
 
-    .a-canvas,
-    video {
-        display: none;
-    }
+  .a-canvas,
+  video {
+    display: none;
+  }
 }
 </style>
