@@ -1,7 +1,7 @@
 module.exports = {
-  pwa: {
-    name: 'Glarce'
-  },
+	pwa: {
+		name: 'Glarce'
+	},
 
-  publicPath: process.env.publicPath || '/'
+	publicPath: process.env.publicPath || '/'
 }

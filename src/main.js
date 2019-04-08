@@ -4,10 +4,10 @@ import './registerServiceWorker'
 
 import
 {
-  MdButton,
-  MdDialog
+	MdButton,
+	MdDialog
 }
-from 'vue-material/dist/components'
+	from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default-dark.css'
 
@@ -18,14 +18,14 @@ Vue.config.productionTip = false
 
 
 Vue.config.ignoredElements = [
-  'a-scene',
-  'a-assets',
-  'a-marker',
-  'a-video',
-  'a-entity'
+	'a-scene',
+	'a-assets',
+	'a-marker',
+	'a-video',
+	'a-entity'
 ]
 
 new Vue(
-{
-  render: h => h(App),
-}).$mount('#app')
+	{
+		render: h => h(App),
+	}).$mount('#app')

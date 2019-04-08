@@ -1,11 +1,18 @@
 <template>
-<a-video :id="`videoScreen${index}`" rotation="-90 0 0" :src="'#vid'+videoData.id" autoplay="true" :width="videoData.width" :height="videoData.height"></a-video>
+  <a-video
+    :id="`videoScreen${index}`"
+    rotation="-90 0 0"
+    :src="'#vid'+videoData.id"
+    autoplay="true"
+    :width="videoData.width"
+    :height="videoData.height"
+  />
 </template>
 
 <script>
 export default
 {
-  name: 'videoHelper',
-  props: ['index', 'videoData']
+	name: 'VideoHelper',
+	props: ['index', 'videoData']
 }
 </script>
