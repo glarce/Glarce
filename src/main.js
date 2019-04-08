@@ -4,10 +4,10 @@ import './registerServiceWorker'
 
 import
 {
-  MdButton,
-  MdDialog
+	MdButton,
+	MdDialog
 }
-from './lib/vue-material/dist/components'
+	from './lib/vue-material/dist/components'
 import './lib/vue-material/dist/vue-material.css'
 import './lib/vue-material/dist/theme/default-dark.css'
 
