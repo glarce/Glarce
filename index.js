@@ -1,5 +1,7 @@
 // Important libraries
 let fs = require('fs-extra')
+let { normalize } = require('path')
+let shell = require('shelljs')
 
 // Styling libraries
 let chalk = require('chalk')
@@ -9,28 +11,42 @@ let _cliProgress = require('cli-progress')
 let Res = require('./lib/res').Res
 let resHandlers = require('./lib/res').handlers
 
+// Fucntions
+const funcs = require('./lib/functions')
+
 // Quicker programing variables
 const info = console.info
 
 class Glarce {
-  constructor() {
-    console.log('\x1Bc')
-    info(chalk.cyan(
-      `======================
+	constructor() {
+		console.log('\x1Bc')
+		info(
+			chalk.cyan(
+				`======================
         Glarce
   Web AR, Simplified
 ======================
 
 `
-    ))
+			)
+		)
 
-    this.buildLength = 0
-    this.getBuilds = []
+		this.buildLength = 0
+		this.getBuilds = []
 
-    this.json = []
-  }
+		this.json = []
 
-  /**
+		const dirs = funcs.getDirectories('./media/')
+
+		dirs.forEach(item => {
+			fs.ensureSymlinkSync(
+				normalize(`${__dirname}/../../media/${item}`),
+				normalize(`${__dirname}/public/${item}`)
+			)
+		})
+	}
+
+	/**
    *  publicPath:
    *  Sets the path for production.
    *  app.set('publicPath', '/myPublicPath/')
@@ -139,28 +155,28 @@ class Glarce {
    * INTERNAL FUNCTION, DO NOT CALL
    * Cleans up memory and prepares server
    */
-  startServer() {
-    // ===============
-    // Clean up memory
-    // ===============
+	startServer() {
+		// ===============
+		// Clean up memory
+		// ===============
 
-    delete this.bar
-    delete this.buildLength
-    delete this.getBuilds
-    delete this.json
+		delete this.bar
+		delete this.buildLength
+		delete this.getBuilds
+		delete this.json
 
-    fs = shell = _cliProgress = Res = resHandlers = null
+		fs = shell = _cliProgress = Res = resHandlers = normalize = null
 
-    console.log('\x1Bc')
-    info(chalk.green('Memory cleared'))
+		console.log('\x1Bc')
+		info(chalk.green('Memory cleared'))
 
-    // ============
-    // Start server
-    // ============
-    const Ws = require('./lib/webServer')
+		// ============
+		// Start server
+		// ============
+		const Ws = require('./lib/webServer')
 
-    this.server = new Ws(this.server)
-  }
+		this.server = new Ws(this.server)
+	}
 }
 
 module.exports = Glarce

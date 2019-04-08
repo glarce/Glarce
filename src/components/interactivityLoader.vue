@@ -1,8 +1,16 @@
 <template>
-<div>
-  <alert v-if="data.type == 'alert'" :vidId="vidId" :data="data" />
-  <question v-if="data.type == 'question'" :vidId="vidId" :data="data" />
-</div>
+  <div>
+    <alert
+      v-if="data.type == 'alert'"
+      :vid-id="vidId"
+      :data="data"
+    />
+    <question
+      v-if="data.type == 'question'"
+      :vid-id="vidId"
+      :data="data"
+    />
+  </div>
 </template>
 
 <script>
@@ -11,12 +19,12 @@ import question from './interactives/question.vue'
 
 export default
 {
-  name: 'interactivityLoader',
-  props: ['vidId', 'data'],
-  components:
+	name: 'InteractivityLoader',
+	components:
   {
-    alert,
-    question
-  }
+  	alert,
+  	question
+  },
+	props: ['vidId', 'data']
 }
 </script>

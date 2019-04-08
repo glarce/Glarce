@@ -14,55 +14,39 @@
 <script>
 import EventBus from '../../scripts/eventBus'
 
-export default
-{
-  name: 'alert',
-  props: ['vidId', 'data'],
-  data()
-  {
-    const data = this.data
-
-    let btnText = 'Ok'
-
-    if (typeof this.data.button !== 'undefined')
-    {
-      btnText = this.data.button
-    }
-
-    return {
-      btnText,
-      display: false,
-      id: this.data.id
-    }
-  },
-  methods:
-  {
-    play()
-    {
-      console.log(`${this.id}: Playing video`)
-
-      this.display = false
-
-      // Start A-scene
-      document.querySelector('a-scene').play()
-
-      EventBus.$emit('play', this.vidId)
-    },
-    loadInteractive(id)
-    {
-      if (id === this.id)
-      {
-        console.log(`${this.id}: Triggured`)
-
-        this.display = true
-      }
-    }
-  },
-  mounted()
-  {
-    console.log(`${this.id}: Mounting`)
-
-    EventBus.$on('loadInteractive', this.loadInteractive)
-  }
+export default {
+	name: 'Alert',
+	props: ['vidId', 'data'],
+	data() {
+		const data = this.data
+		let btnText = 'Ok'
+		if (typeof this.data.button !== 'undefined') {
+			btnText = this.data.button
+		}
+		return {
+			btnText,
+			display: false,
+			id: this.data.id
+		}
+	},
+	mounted() {
+		console.log(`${this.id}: Mounting`)
+		EventBus.$on('loadInteractive', this.loadInteractive)
+	},
+	methods: {
+		play() {
+			console.log(`${this.id}: Playing video`)
+			this.display = false
+			// Start A-scene
+			document.querySelector('a-scene').play()
+			EventBus.$emit('play', this.vidId)
+		},
+		loadInteractive(id) {
+			if (id === this.id) {
+				console.log(`${this.id}: Triggured`)
+				this.display = true
+			}
+		}
+	}
 }
 </script>
