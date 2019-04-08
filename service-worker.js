@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Glarce/precache-manifest.8abce743d384b02cb175fbcfe4d5ea7e.js"
+  "/Glarce/precache-manifest.90065344405abc452ef4f8a0d30f928a.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "Glarce"});
