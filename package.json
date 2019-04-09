@@ -24,7 +24,9 @@
     "sass-loader": "^7.1.0",
     "selfsigned": "^1.10.4",
     "symlink-dir": "^2.0.2",
+    "uglify-es": "^3.3.9",
     "vue": "^2.6.10",
+    "vue-material": "vuematerial/vue-material",
     "vue-template-compiler": "^2.6.10"
   },
   "postcss": {
@@ -36,5 +38,21 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
+  ],
+  "modules": [
+    {
+      "name": "server-template",
+      "options": {
+        "repository": "https://github.com/gbaumgart/xcf-servers.git",
+        "recursive": true,
+        "directory": "server-template",
+        "profile": "control-freak"
+      },
+      "clone": {
+        "post": {
+          "command": "git submodule foreach \"git checkout master\""
+        }
+      }
+    }
   ]
 }

@@ -7,9 +7,9 @@ import
 	MdButton,
 	MdDialog
 }
-	from './lib/vue-material/dist/components'
-import './lib/vue-material/dist/vue-material.css'
-import './lib/vue-material/dist/theme/default-dark.css'
+	from 'vue-material/dist/components'
+import 'vue-material/dist/vue-material.css'
+import 'vue-material/dist/theme/default-dark.css'
 
 Vue.use(MdButton)
 Vue.use(MdDialog) 

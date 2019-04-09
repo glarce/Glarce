@@ -1,3 +1,0 @@
-[submodule "vue-material"]
-	path = src/lib/vue-material
-	url = https://github.com/vuematerial/vue-material.git
