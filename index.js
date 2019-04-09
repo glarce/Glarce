@@ -26,7 +26,6 @@ class Glarce {
         Glarce
   Web AR, Simplified
 ======================
-
 `
 			)
 		)
@@ -71,8 +70,9 @@ class Glarce {
 			this.server = variable
 			break
 		default:
-			console.error(chalk.red.bold(`'${input}' is not a recognised set command`))
-			break
+			throw new Error(
+				chalk.red.bold(`'${input}' is not a recognised set command`)
+			)
 		}
 	}
 
@@ -89,7 +89,6 @@ class Glarce {
 		for (let i = 0; i < this.getBuilds.length; i++) {
 			const build = this.getBuilds[i]
 
-			resHandlers.increseIndex()
 			build.funct(new Res(build.string))
 
 			this.bar.update(i + 1)
@@ -114,7 +113,10 @@ class Glarce {
 		if (process.env.production) flags = 'build'
 
 		info(chalk.green('Saving JSON'))
-		fs.writeFileSync('./node_modules/Glarce/src/app.json', JSON.stringify(this.json))
+		fs.writeFileSync(
+			'./node_modules/Glarce/src/app.json',
+			JSON.stringify(this.json)
+		)
 
 		info('')
 
@@ -126,29 +128,28 @@ class Glarce {
 		}
 
 		info('')
-		let Vue = require('../../node_modules/@vue/cli-service/lib/Service')
-		let vue = new Vue(__dirname)
 
-		vue.run(process.env.production ? 'build' : 'serve', {
-			https: true
-		})
-			.then(() => {
-				info('')
-				info(chalk.green('Moving build files to ./dist/'))
-				if (process.env.production === 'build') {
-					fs.move('./node_modules/Glarce/dist', './dist/', {
-						overwrite: true
-					}, err => {
-						if (err) return console.error(chalk.bold.red(err))
-					})
-				}
-				if (this.server)
-					this.startServer()
-			})
-			.catch(err => {
-				console.log(err)
-				process.exit(1)
-			})
+		shell.exec(
+			`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${flags}`,
+			{
+				cwd: 'node_modules/Glarce'
+			}
+		)
+
+		info('')
+		info(chalk.green('Moving build files to ./dist/'))
+		fs.move(
+			'./node_modules/Glarce/dist',
+			'./dist/',
+			{
+				overwrite: true
+			},
+			err => {
+				if (err) throw new Error(chalk.bold.red(err))
+			}
+		)
+
+		if (this.server) this.startServer()
 	}
 
 	/**
