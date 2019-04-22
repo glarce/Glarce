@@ -77,10 +77,15 @@ export default {
     window.addEventListener('orientationchange', this.orientation)
 	},
 	methods: {
+    /**
+     * Call when the window orientation changes. 
+     * Desigened to reduce CPU and GPU load while not in the correct orientation.
+     */
 		orientation() {
       console.log('orientation change!')
 
-      let orientation = window.matchMedia("(orientation: portrait)").matches
+      // Get CSS orientation data
+      let orientation = window.matchMedia('(orientation: portrait)').matches
 
       /**
        * Safari recognises portrait as landscape and vice versa
