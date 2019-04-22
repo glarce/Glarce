@@ -75,7 +75,6 @@ export default {
 			.querySelector('a-scene')
 			.addEventListener('loaded', this.orientation)
 
-		// Future orientation changes
 		window.addEventListener('orientationchange', this.orientation)
 	},
 	methods: {
@@ -112,7 +111,7 @@ export default {
 </script>
 
 <style lang="scss">
-// Kill list
+// Remove unwanted ar.js dom elements
 #arjsDebugUIContainer,
 #orientation,
 .a-enter-vr {

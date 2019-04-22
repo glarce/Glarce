@@ -21,9 +21,7 @@ export default function() {
 			// Grab marker element
 			this.el = document.getElementById(`marker${this.data.vidId}`)
 
-			// Set toggle to false
 			this.toggle = false
-			// Set should play to true
 			this.shouldPlay = true
 
 			// Grab the video and initialise it
@@ -40,9 +38,7 @@ export default function() {
 
 			// Safari handeler and setting shouldPlay
 			if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-				// Safari wait
 				this.safariWait = true
-				// Safari event sent
 				this.safariEvent = false
 			}
 
@@ -91,46 +87,29 @@ export default function() {
 			window.addEventListener('click', tap)
 
 			// === EventBus ===
-			// On play triggure play
 			EventBus.$on('play', id => playVid(id))
-			// Jump to second
 			EventBus.$on('jump', data => jump(data.id, data.sec))
-			// Safari done
 			EventBus.$on('safariDone', id => safariDone(id))
 		},
 		tick() {
-			// Visibility manager
 			this.objectVisibility()
-
-			// Manage interactive systems
 			this.interactiveManager()
 		},
 		objectVisibility() {
-			// If it is visible
 			if (this.el.object3D.visible === true) {
-				// If it should play and hasn't toggled and safari wait
 				if (this.shouldPlay && !this.toggle && !this.safariWait) {
-					// Set toggle to true
 					this.toggle = true
-
-					// Play video
 					this.vid.play()
-				// Send safari event when visible
 				} else if (this.safariWait && !this.safariEvent) {
-					// Send safari event
 					EventBus.$emit('safari', this.data.vidId)
-					// Safari event sent
 					this.safariEvent = true
 				}
-			}
-			// If it is not visible and nly truggure if toggle hasn't been triggered on pause cycle (potential speed improvments)
-			else if (this.toggle) {
+			} else if (this.toggle) {
 				this.toggle = false
 				this.vid.pause()
 			}
 		},
 		interactiveManager() {
-			// Get the video time in seconds
 			const time = Math.floor(this.vid.currentTime)
 			// Get the amount of interactives that exist
 			if (time === Math.floor(this.vid.duration)) {
@@ -145,26 +124,19 @@ export default function() {
 			for (let i = 0; i < this.interactive.length; i++) {
 				// don't run if this has already been executed and run if the time point is within the time specified
 				if (!this.interactive[i].executed && this.interactive[i].sec === time) {
-					// Pause the video
 					this.vid.pause()
-					// set should play to false
 					this.shouldPlay = false
 
-					// Type end
 					if (this.interactive[i].type === 'end') {
 						// Jump to end
 						this.vid.currentTime = this.vid.duration
-					}
-					// If it is something else
-					else {
+					} else {
 						// Pause A-scene
 						document.querySelector('a-scene').pause()
 
 						// Send it to interactive components
 						EventBus.$emit('loadInteractive', this.interactive[i].id)
 					}
-
-					// Set it to have executed
 					this.interactive[i].executed = true
 				}
 			}

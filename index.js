@@ -7,14 +7,10 @@ let shell = require('shelljs')
 let chalk = require('chalk')
 let _cliProgress = require('cli-progress')
 
-// Res and its hadnelers
 let Res = require('./lib/res').Res
 let resHandlers = require('./lib/res').handlers
 
-// Fucntions
 const funcs = require('./lib/functions')
-
-// Quicker programing variables
 const regulate = require('./regulate')
 
 class Glarce {
@@ -100,7 +96,6 @@ class Glarce {
 		this.bar = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic)
 		this.bar.start(this.buildLength, 0)
 
-		// Build
 		this.build()
 
 		// Grab json resHandeler
