@@ -68,41 +68,43 @@ export default {
 	mounted() {
 		interactivityHelper()
 
-    // Load
+		// Load
 		document
 			.querySelector('a-scene')
 			.addEventListener('loaded', this.orientation)
 
-    // Future orientation changes
-    window.addEventListener('orientationchange', this.orientation)
+		// Future orientation changes
+		window.addEventListener('orientationchange', this.orientation)
 	},
 	methods: {
-    /**
+		/**
      * Call when the window orientation changes. 
      * Desigened to reduce CPU and GPU load while not in the correct orientation.
      */
 		orientation() {
-      console.log('orientation change!')
+			console.log('orientation change!')
 
-      // Get CSS orientation data
-      let orientation = window.matchMedia('(orientation: portrait)').matches
+			// Get CSS orientation data
+			let orientation = window.matchMedia('(orientation: portrait)').matches
 
-      /**
+			/**
        * Safari recognises portrait as landscape and vice versa
        * This fucntion reverses orientation if Safari is the current browser
        */
-      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {orientation = !orientation}
+			if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+				orientation = !orientation
+			}
 
-      if (orientation) {
-        // Is portrait
-        console.log('portrait')
-        document.querySelector('a-scene').pause()
-      } else {
-        // Is landscape
-        console.log('landscape')
-        document.querySelector('a-scene').play()
-      }
-    }
+			if (orientation) {
+				// Is portrait
+				console.log('portrait')
+				document.querySelector('a-scene').pause()
+			} else {
+				// Is landscape
+				console.log('landscape')
+				document.querySelector('a-scene').play()
+			}
+		}
 	}
 }
 </script>
