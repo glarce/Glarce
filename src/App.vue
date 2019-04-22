@@ -67,28 +67,37 @@ export default {
 	},
 	mounted() {
 		interactivityHelper()
-		// Load
+
+    // Load
 		document
 			.querySelector('a-scene')
 			.addEventListener('loaded', this.orientation)
-		// Future orientation changes
-		window.addEventListener('orientationchange', this.orientation)
+
+    // Future orientation changes
+    window.addEventListener('orientationchange', this.orientation)
 	},
 	methods: {
 		orientation() {
-			console.log('orientation change!')
-			setTimeout(() => {
-				if (window.innerHeight > window.innerWidth) {
-					// Is portrait
-					console.log('portrait')
-					document.querySelector('a-scene').pause()
-				} else {
-					// Is landscape
-					console.log('landscape')
-					document.querySelector('a-scene').play()
-				}
-			}, 20)
-		}
+      console.log('orientation change!')
+
+      let orientation = window.matchMedia("(orientation: portrait)").matches
+
+      /**
+       * Safari recognises portrait as landscape and vice versa
+       * This fucntion reverses orientation if Safari is the current browser
+       */
+      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {orientation = !orientation}
+
+      if (orientation) {
+        // Is portrait
+        console.log('portrait')
+        document.querySelector('a-scene').pause()
+      } else {
+        // Is landscape
+        console.log('landscape')
+        document.querySelector('a-scene').play()
+      }
+    }
 	}
 }
 </script>
