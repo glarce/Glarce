@@ -28,11 +28,21 @@
 <script>
 import EventBus from '../../scripts/eventBus'
 
+import regulate from '../../../regulate'
+
 export default {
 	name: 'Alert',
-	props: ['vidId', 'data'],
+	props: {
+		vidId: {
+			type: Number,
+			required: true
+		},
+		data: {
+			type: Array,
+			required: true
+		}
+	},
 	data() {
-		const data = this.data
 		let btnText = 'Ok'
 		if (typeof this.data.button !== 'undefined') {
 			btnText = this.data.button
@@ -44,12 +54,12 @@ export default {
 		}
 	},
 	mounted() {
-		console.log(`${this.id}: Mounting`)
+		regulate.webInfo(`${this.id}: Mounting`)
 		EventBus.$on('loadInteractive', this.loadInteractive)
 	},
 	methods: {
 		play() {
-			console.log(`${this.id}: Playing video`)
+			regulate.webInfo(`${this.id}: Playing video`)
 			this.display = false
 			// Start A-scene
 			document.querySelector('a-scene').play()
@@ -57,7 +67,7 @@ export default {
 		},
 		loadInteractive(id) {
 			if (id === this.id) {
-				console.log(`${this.id}: Triggured`)
+				regulate.webInfo(`${this.id}: Triggured`)
 				this.display = true
 			}
 		}

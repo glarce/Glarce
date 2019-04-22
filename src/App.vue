@@ -46,11 +46,13 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 const dev = process.env.NODE_ENV === 'development'
+
 import barcodeHelper from './components/barcodeHelper.vue'
 import Safari from './components/safari.vue'
-
 import interactivityHelper from './scripts/interactivityHelper'
+import regulate from '../regulate'
 
 export default {
 	name: 'App',
@@ -82,7 +84,7 @@ export default {
      * Desigened to reduce CPU and GPU load while not in the correct orientation.
      */
 		orientation() {
-			console.log('orientation change!')
+			regulate.webInfo('orientation change!')
 
 			// Get CSS orientation data
 			let orientation = window.matchMedia('(orientation: portrait)').matches
@@ -97,11 +99,11 @@ export default {
 
 			if (orientation) {
 				// Is portrait
-				console.log('portrait')
+				regulate.webInfo('portrait')
 				document.querySelector('a-scene').pause()
 			} else {
 				// Is landscape
-				console.log('landscape')
+				regulate.webInfo('landscape')
 				document.querySelector('a-scene').play()
 			}
 		}

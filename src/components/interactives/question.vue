@@ -28,9 +28,20 @@
 <script>
 import EventBus from '../../scripts/eventBus'
 
+import regulate from '../../../regulate'
+
 export default {
 	name: 'Question',
-	props: ['vidId', 'data'],
+	props: {
+		vidId: {
+			type: Number,
+			required: true
+		},
+		data: {
+			type: Array,
+			required: true
+		}
+	},
 	data() {
 		return {
 			display: false,
@@ -38,16 +49,16 @@ export default {
 		}
 	},
 	mounted() {
-		console.log(`${this.id}: Mounting`)
+		regulate.webInfo(`${this.id}: Mounting`)
 		EventBus.$on('loadInteractive', this.loadInteractive)
 	},
 	methods: {
 		click(index) {
-			console.log(index)
-			console.log(this)
+			regulate.webInfo(index)
+			regulate.webInfo(this)
 			const button = this.data.buttons[index]
 			if (typeof button.jumpTo !== 'undefined') {
-				console.log(`${this.id}: Jumping to ${button.jumpTo} seconds`)
+				regulate.webInfo(`${this.id}: Jumping to ${button.jumpTo} seconds`)
 				EventBus.$emit('jump', {
 					id: this.vidId,
 					sec: button.jumpTo
@@ -56,7 +67,7 @@ export default {
 			this.play()
 		},
 		play() {
-			console.log(`${this.id}: Playing video`)
+			regulate.webInfo(`${this.id}: Playing video`)
 			this.display = false
 			// Start A-scene
 			document.querySelector('a-scene').play()
@@ -64,7 +75,7 @@ export default {
 		},
 		loadInteractive(id) {
 			if (id === this.id) {
-				console.log(`${this.id}: Triggured`)
+				regulate.webInfo(`${this.id}: Triggured`)
 				this.display = true
 			}
 		}

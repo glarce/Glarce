@@ -10,9 +10,17 @@
 </template>
 
 <script>
-export default
-{
+export default {
 	name: 'VideoHelper',
-	props: ['index', 'videoData']
+	props: {
+		index: {
+			type: Number,
+			required: true
+		},
+		videoData: {
+			type: Array,
+			required: true
+		}
+	}
 }
 </script>

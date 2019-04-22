@@ -16,7 +16,7 @@
       :index="index"
       :video-data="barcodeData.videoData"
       :interactivity-helper="`vidId: ${barcodeData.videoData.id}; interactivity: ${JSON.stringify([])}`"
-    />~
+    />
 
     <div v-if="barcodeData.videoData.interactive">
       <div
@@ -50,11 +50,20 @@ export default
 {
 	name: 'BarcodeHelper',
 	components:
-  {
-  	videoHelper,
-  	interactivityLoader
-  },
-	props: ['index', 'barcodeData'],
+	{
+		videoHelper,
+		interactivityLoader
+	},
+	props: {
+		index: {
+			type: Number,
+			required: true
+		},
+		barcodeData: {
+			type: Array,
+			required: true
+		}
+	},
 	data: function() {
 		const id = `marker${this.barcodeData.id}`
 

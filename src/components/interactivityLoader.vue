@@ -21,10 +21,19 @@ export default
 {
 	name: 'InteractivityLoader',
 	components:
-  {
-  	alert,
-  	question
-  },
-	props: ['vidId', 'data']
+	{
+		alert,
+		question
+	},
+	props: {
+		vidId: {
+			type: Number,
+			required: true
+		},
+		data: {
+			type: Array,
+			required: true
+		}
+	}
 }
 </script>

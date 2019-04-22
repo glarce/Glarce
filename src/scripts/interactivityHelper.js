@@ -1,6 +1,8 @@
 /* global AFRAME */
 import EventBus from './eventBus'
 
+import regulate from '../../regulate'
+
 export default function() {
 	AFRAME.registerComponent('interactivity-helper', {
 		schema: {
@@ -19,18 +21,18 @@ export default function() {
 			// Grab marker element
 			this.el = document.getElementById(`marker${this.data.vidId}`)
 
-			// set toggle to false
+			// Set toggle to false
 			this.toggle = false
-			// set should play to true
+			// Set should play to true
 			this.shouldPlay = true
 
-			// Grab the video
+			// Grab the video and initialise it
 			this.vid = document.getElementById(`vid${this.data.vidId}`)
 			this.vid.ontimeupdate = this.timeUpdate
 			this.vid.pause()
 			this.vid.currentTime = 0
 
-			// bypass schema change lock
+			// Bypass schema change lock
 			this.interactive = JSON.parse(this.data.interactivity)
 
 			// Set tick time
@@ -48,7 +50,7 @@ export default function() {
 			// === Event Functions ===
 			// =======================
 
-			// Play vidoo after event is triggured
+			// Play video after event is triggered
 			let playVid = function(id) {
 				if (this.data.vidId === id) {
 					// Toggle play state with hacky event code
@@ -74,7 +76,9 @@ export default function() {
 			// Safari event
 			let safariDone = function(id) {
 				if (this.data.vidId === id) {
-					console.info(`${this.data.vidId} handeler: Enabling video for safari`)
+					regulate.webInfo(
+						`${this.data.vidId} handeler: Enabling video for safari`
+					)
 
 					// Tell program that safari is dealt with
 					this.safariWait = false
@@ -105,28 +109,24 @@ export default function() {
 			// If it is visible
 			if (this.el.object3D.visible === true) {
 				// If it should play and hasn't toggled and safari wait
-				if (!this.toggle && !this.safariWait && this.shouldPlay) {
+				if (this.shouldPlay && !this.toggle && !this.safariWait) {
 					// Set toggle to true
 					this.toggle = true
 
 					// Play video
 					this.vid.play()
-				}
 				// Send safari event when visible
-				else if (this.safariWait && !this.safariEvent) {
+				} else if (this.safariWait && !this.safariEvent) {
 					// Send safari event
 					EventBus.$emit('safari', this.data.vidId)
 					// Safari event sent
 					this.safariEvent = true
 				}
 			}
-			// If it is not visible
-			else {
-				// Only truggure if toggle hasn't been triggered on pause cycle (potential speed improvments)
-				if (this.toggle) {
-					this.toggle = false
-					this.vid.pause()
-				}
+			// If it is not visible and nly truggure if toggle hasn't been triggered on pause cycle (potential speed improvments)
+			else if (this.toggle) {
+				this.toggle = false
+				this.vid.pause()
 			}
 		},
 		interactiveManager() {
