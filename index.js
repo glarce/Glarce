@@ -7,20 +7,16 @@ let shell = require('shelljs')
 let chalk = require('chalk')
 let _cliProgress = require('cli-progress')
 
-// Res and its hadnelers
 let Res = require('./lib/res').Res
 let resHandlers = require('./lib/res').handlers
 
-// Fucntions
 const funcs = require('./lib/functions')
-
-// Quicker programing variables
-const info = console.info
+const regulate = require('./regulate')
 
 class Glarce {
 	constructor() {
-		console.log('\x1Bc')
-		info(
+		regulate.info('\x1Bc')
+		regulate.info(
 			chalk.cyan(
 				`======================
         Glarce
@@ -100,35 +96,34 @@ class Glarce {
 		this.bar = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic)
 		this.bar.start(this.buildLength, 0)
 
-		// Build
 		this.build()
 
 		// Grab json resHandeler
 		this.json = resHandlers.getJSON()
 
 		this.bar.stop()
-		info('')
+		regulate.info('')
 
 		// Set terminal commands
 		let flags = 'serve --https'
 		if (process.env.production) flags = 'build'
 
-		info(chalk.green('Saving JSON'))
+		regulate.info(chalk.green('Saving JSON'))
 		fs.writeFileSync(
 			'./node_modules/Glarce/src/app.json',
 			JSON.stringify(this.json)
 		)
 
-		info('')
+		regulate.info('')
 
 		if (process.env.production) {
-			info(chalk.green('Running build!'))
+			regulate.info(chalk.green('Running build!'))
 		} else {
-			info(chalk.red('Starting a dev server'))
-			info(chalk.bold.red('DO NOT USE THIS FOR PRODUCTION'))
+			regulate.info(chalk.red('Starting a dev server'))
+			regulate.info(chalk.bold.red('DO NOT USE THIS FOR PRODUCTION'))
 		}
 
-		info('')
+		regulate.info('')
 
 		shell.exec(
 			`node ./node_modules/@vue/cli-service/bin/vue-cli-service ${flags}`,
@@ -137,8 +132,8 @@ class Glarce {
 			}
 		)
 
-		info('')
-		info(chalk.green('Moving build files to ./dist/'))
+		regulate.info('')
+		regulate.info(chalk.green('Moving build files to ./dist/'))
 		fs.move(
 			'./node_modules/Glarce/dist',
 			'./dist/',
@@ -169,8 +164,8 @@ class Glarce {
 
 		fs = shell = _cliProgress = Res = resHandlers = normalize = null
 
-		console.log('\x1Bc')
-		info(chalk.green('Memory cleared'))
+		regulate.info('\x1Bc')
+		regulate.info(chalk.green('Memory cleared'))
 
 		// ============
 		// Start server
