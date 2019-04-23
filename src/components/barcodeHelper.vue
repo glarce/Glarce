@@ -40,19 +40,32 @@
     :value="barcodeData.scan"
     v-html="aframeHTML"
   />
+
+  <a-marker
+    v-else-if="barcodedata.type === 'img'"
+    :id="markerID"
+    type="barcode"
+    :value="barcodeData.scan"
+  >
+    <img-helper :data="barcodeData.imgHelper" />
+  </a-marker>
 </template>
 
 <script>
 import videoHelper from './videoHelper.vue'
 import interactivityLoader from './interactivityLoader.vue'
 
+import imgHelper from './imgHelper.vue'
+
 export default
 {
 	name: 'BarcodeHelper',
 	components:
 	{
-		videoHelper,
-		interactivityLoader
+    videoHelper,
+    interactivityLoader,
+
+    imgHelper
 	},
 	props: {
 		index: {
