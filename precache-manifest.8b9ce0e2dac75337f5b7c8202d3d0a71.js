@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/Glarce/js/app.9ab19c62.js"
   },
   {
-    "revision": "c33b86dbd7fa377fb6f9",
+    "revision": "90ddd940a7687a55f76d",
     "url": "/Glarce/css/chunk-vendors.f4d1286a.css"
   },
   {
-    "revision": "c33b86dbd7fa377fb6f9",
-    "url": "/Glarce/js/chunk-vendors.f4758d1f.js"
+    "revision": "90ddd940a7687a55f76d",
+    "url": "/Glarce/js/chunk-vendors.ee41443b.js"
   },
   {
-    "revision": "c42e6dba471e0b888d262d1730ab61dd",
+    "revision": "205b0d2e6b947a458be0771cb61e02ef",
     "url": "/Glarce/index.html"
   },
   {
