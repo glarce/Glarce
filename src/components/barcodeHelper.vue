@@ -19,10 +19,7 @@
     />
 
     <div v-if="barcodeData.videoData.interactive">
-      <div
-        v-for="(inter, index) in barcodeData.videoData.interactive"
-        :key="index"
-      >
+      <div v-for="(inter, index) in barcodeData.videoData.interactive" :key="index">
         <interactivity-loader
           :key="index"
           :name="index"
@@ -42,57 +39,55 @@
   />
 
   <a-marker
-    v-else-if="barcodedata.type === 'img'"
+    v-else-if="barcodeData.contentType === 'image'"
     :id="markerID"
     type="barcode"
     :value="barcodeData.scan"
   >
-    <img-helper :data="barcodeData.imgHelper" />
+    <img-helper :data="barcodeData.imgData" :index="index"/>
   </a-marker>
 </template>
 
 <script>
-import videoHelper from './videoHelper.vue'
-import interactivityLoader from './interactivityLoader.vue'
+import videoHelper from "./videoHelper.vue";
+import interactivityLoader from "./interactivityLoader.vue";
 
-import imgHelper from './imgHelper.vue'
+import imgHelper from "./imgHelper.vue";
 
-export default
-{
-	name: 'BarcodeHelper',
-	components:
-	{
+export default {
+  name: "BarcodeHelper",
+  components: {
     videoHelper,
     interactivityLoader,
 
     imgHelper
-	},
-	props: {
-		index: {
-			type: Number,
-			required: true
-		},
-		barcodeData: {
-			type: Array,
-			required: true
-		}
-	},
-	data: function() {
-		const id = `marker${this.barcodeData.id}`
+  },
+  props: {
+    index: {
+      type: Number,
+      required: true
+    },
+    barcodeData: {
+      type: Object,
+      required: true
+    }
+  },
+  data: function() {
+    const id = `marker${this.barcodeData.id}`;
 
-		return {
-			markerID: id,
-			aframeHTML: ''
-		}
-	},
-	mounted: function() {
-		if (this.barcodeData.contentType === 'aframe') {
-			this.aframeHTML = this.barcodeData.aframeData.aframe.toString()
+    return {
+      markerID: id,
+      aframeHTML: ""
+    };
+  },
+  mounted: function() {
+    if (this.barcodeData.contentType === "aframe") {
+      this.aframeHTML = this.barcodeData.aframeData.aframe.toString();
 
-			// Run JS
-			const runJS = new Function(this.barcodeData.aframeData.js)
-			runJS()
-		}
-	}
-}
+      // Run JS
+      const runJS = new Function(this.barcodeData.aframeData.js);
+      runJS();
+    }
+  }
+};
 </script>
