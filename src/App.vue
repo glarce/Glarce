@@ -3,7 +3,7 @@
     arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;, prodcution: true"
     :stats="`${dev}`"
   >
-    <safari />
+    <safari/>
 
     <a-assets>
       <slot v-for="(media) in markers">
@@ -27,87 +27,92 @@
           >
         </video>
 
-        <slot
-          v-else-if="media.contentType === 'aframe'"
-          v-html="media.aframeData.assets"
-        />
+        <slot v-else-if="media.contentType === 'aframe'" v-html="media.aframeData.assets"/>
+
+        <img
+          v-else-if="media.contentType === 'image' || media.contentType === 'image360'"
+          :key="media.id"
+          :src="media.imgData.img"
+          :id="`imgsrc${media.id}`"
+        >
       </slot>
     </a-assets>
-    <slot v-for="(marker, index) in markers">
+    
+    <slot v-for="(marker) in markers">
       <slot v-if="marker.scanType == 'barcode'">
-        <barcodeHelper
-          :index="index"
-          :barcode-data="marker"
-        />
+        <barcodeHelper :index="marker.id" :barcode-data="marker"/>
       </slot>
     </slot>
-    <a-entity camera />
+
+    <a-sky id="asky" src="#test"></a-sky>
+
+    <a-entity camera/>
   </a-scene>
 </template>
 
 <script>
 // eslint-disable-next-line no-unused-vars
-const dev = process.env.NODE_ENV === 'development'
+const dev = process.env.NODE_ENV === "development";
 
-import barcodeHelper from './components/barcodeHelper.vue'
-import Safari from './components/safari.vue'
-import interactivityHelper from './scripts/interactivityHelper'
-import regulate from '../regulate'
+import barcodeHelper from "./components/barcodeHelper.vue";
+import Safari from "./components/safari.vue";
+import interactivityHelper from "./scripts/interactivityHelper";
+import regulate from "../regulate";
 
 export default {
-	name: 'App',
-	components: {
-		barcodeHelper,
-		Safari
-	},
-	data() {
-		const markers = require('./app.json')
-		return {
-			markers,
-			dev: process.env.NODE_ENV === 'development'
-		}
-	},
-	mounted() {
-		interactivityHelper()
+  name: "App",
+  components: {
+    barcodeHelper,
+    Safari
+  },
+  data() {
+    const markers = require("./app.json");
+    return {
+      markers,
+      dev: process.env.NODE_ENV === "development"
+    };
+  },
+  mounted() {
+    interactivityHelper();
 
-		// Load
-		document
-			.querySelector('a-scene')
-			.addEventListener('loaded', this.orientation)
+    // Load
+    document
+      .querySelector("a-scene")
+      .addEventListener("loaded", this.orientation);
 
-		window.addEventListener('orientationchange', this.orientation)
-	},
-	methods: {
-		/**
-     * Call when the window orientation changes. 
+    window.addEventListener("orientationchange", this.orientation);
+  },
+  methods: {
+    /**
+     * Call when the window orientation changes.
      * Desigened to reduce CPU and GPU load while not in the correct orientation.
      */
-		orientation() {
-			regulate.webInfo('orientation change!')
+    orientation() {
+      regulate.webInfo("orientation change!");
 
-			// Get CSS orientation data
-			let orientation = window.matchMedia('(orientation: portrait)').matches
+      // Get CSS orientation data
+      let orientation = window.matchMedia("(orientation: portrait)").matches;
 
-			/**
+      /**
        * Safari recognises portrait as landscape and vice versa
        * This fucntion reverses orientation if Safari is the current browser
        */
-			if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-				orientation = !orientation
-			}
+      if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+        orientation = !orientation;
+      }
 
-			if (orientation) {
-				// Is portrait
-				regulate.webInfo('portrait')
-				document.querySelector('a-scene').pause()
-			} else {
-				// Is landscape
-				regulate.webInfo('landscape')
-				document.querySelector('a-scene').play()
-			}
-		}
-	}
-}
+      if (orientation) {
+        // Is portrait
+        regulate.webInfo("portrait");
+        document.querySelector("a-scene").pause();
+      } else {
+        // Is landscape
+        regulate.webInfo("landscape");
+        document.querySelector("a-scene").play();
+      }
+    }
+  }
+};
 </script>
 
 <style lang="scss">

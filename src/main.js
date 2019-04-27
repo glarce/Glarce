@@ -16,7 +16,9 @@ Vue.config.ignoredElements = [
 	'a-assets',
 	'a-marker',
 	'a-video',
-	'a-entity'
+	'a-image',
+	'a-entity',
+	'a-sky'
 ]
 
 new Vue({

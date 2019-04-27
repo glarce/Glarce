@@ -19,10 +19,7 @@
     />
 
     <div v-if="barcodeData.videoData.interactive">
-      <div
-        v-for="(inter, index) in barcodeData.videoData.interactive"
-        :key="index"
-      >
+      <div v-for="(inter, index) in barcodeData.videoData.interactive" :key="index">
         <interactivity-loader
           :key="index"
           :name="index"
@@ -40,46 +37,69 @@
     :value="barcodeData.scan"
     v-html="aframeHTML"
   />
+
+  <a-marker
+    v-else-if="barcodeData.contentType === 'image'"
+    :id="markerID"
+    type="barcode"
+    :value="barcodeData.scan"
+  >
+    <img-helper :data="barcodeData.imgData" :index="index"/>
+  </a-marker>
+
+  <a-marker
+    v-else-if="barcodeData.contentType === 'image360'"
+    :id="markerID"
+    type="barcode"
+    :value="barcodeData.scan"
+    emitevents="true"
+  >
+    <helper360 :data="barcodeData.imgData" :index="index"/>
+  </a-marker>
 </template>
 
 <script>
-import videoHelper from './videoHelper.vue'
-import interactivityLoader from './interactivityLoader.vue'
+import videoHelper from "./videoHelper.vue";
+import interactivityLoader from "./interactivityLoader.vue";
 
-export default
-{
-	name: 'BarcodeHelper',
-	components:
-	{
-		videoHelper,
-		interactivityLoader
-	},
-	props: {
-		index: {
-			type: Number,
-			required: true
-		},
-		barcodeData: {
-			type: Array,
-			required: true
-		}
-	},
-	data: function() {
-		const id = `marker${this.barcodeData.id}`
+import imgHelper from "./imgHelper.vue";
+import helper360 from './360Helper.vue'
 
-		return {
-			markerID: id,
-			aframeHTML: ''
-		}
-	},
-	mounted: function() {
-		if (this.barcodeData.contentType === 'aframe') {
-			this.aframeHTML = this.barcodeData.aframeData.aframe.toString()
+export default {
+  name: "BarcodeHelper",
+  components: {
+    videoHelper,
+    interactivityLoader,
 
-			// Run JS
-			const runJS = new Function(this.barcodeData.aframeData.js)
-			runJS()
-		}
-	}
-}
+    imgHelper,
+    helper360
+  },
+  props: {
+    index: {
+      type: Number,
+      required: true
+    },
+    barcodeData: {
+      type: Object,
+      required: true
+    }
+  },
+  data: function() {
+    const id = `marker${this.barcodeData.id}`;
+
+    return {
+      markerID: id,
+      aframeHTML: ""
+    };
+  },
+  mounted: function() {
+    if (this.barcodeData.contentType === "aframe") {
+      this.aframeHTML = this.barcodeData.aframeData.aframe.toString();
+
+      // Run JS
+      const runJS = new Function(this.barcodeData.aframeData.js);
+      runJS();
+    }
+  }
+};
 </script>
