@@ -30,18 +30,22 @@
         <slot v-else-if="media.contentType === 'aframe'" v-html="media.aframeData.assets"/>
 
         <img
-          v-else-if="media.contentType === 'image'"
+          v-else-if="media.contentType === 'image' || media.contentType === 'image360'"
           :key="media.id"
           :src="media.imgData.img"
           :id="`imgsrc${media.id}`"
         >
       </slot>
     </a-assets>
+    
     <slot v-for="(marker) in markers">
       <slot v-if="marker.scanType == 'barcode'">
         <barcodeHelper :index="marker.id" :barcode-data="marker"/>
       </slot>
     </slot>
+
+    <a-sky id="asky" src="#test"></a-sky>
+
     <a-entity camera/>
   </a-scene>
 </template>

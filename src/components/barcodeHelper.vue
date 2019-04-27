@@ -46,6 +46,16 @@
   >
     <img-helper :data="barcodeData.imgData" :index="index"/>
   </a-marker>
+
+  <a-marker
+    v-else-if="barcodeData.contentType === 'image360'"
+    :id="markerID"
+    type="barcode"
+    :value="barcodeData.scan"
+    emitevents="true"
+  >
+    <helper360 :data="barcodeData.imgData" :index="index"/>
+  </a-marker>
 </template>
 
 <script>
@@ -53,6 +63,7 @@ import videoHelper from "./videoHelper.vue";
 import interactivityLoader from "./interactivityLoader.vue";
 
 import imgHelper from "./imgHelper.vue";
+import helper360 from './360Helper.vue'
 
 export default {
   name: "BarcodeHelper",
@@ -60,7 +71,8 @@ export default {
     videoHelper,
     interactivityLoader,
 
-    imgHelper
+    imgHelper,
+    helper360
   },
   props: {
     index: {
