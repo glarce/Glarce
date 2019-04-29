@@ -4,7 +4,7 @@ import './registerServiceWorker'
 
 import { MdButton, MdDialog } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default-dark.css'
+import './styles/theme.scss'
 
 Vue.use(MdButton)
 Vue.use(MdDialog)
