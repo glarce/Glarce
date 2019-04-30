@@ -60,7 +60,7 @@ export default
 			required: true
 		},
 		barcodeData: {
-			type: Array,
+			type: Object,
 			required: true
 		}
 	},

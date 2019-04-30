@@ -18,7 +18,7 @@ export default {
 			required: true
 		},
 		videoData: {
-			type: Array,
+			type: Object,
 			required: true
 		}
 	}
