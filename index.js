@@ -40,6 +40,22 @@ class Glarce {
 				normalize(`${__dirname}/public/${item}`)
 			)
 		})
+
+		/** Checks for a file that tells us that it has allready installed the dependancies */
+		try {
+			fs.readFileSync('npminstallcomplete.question')
+		} catch (err) {
+			if (err.code === 'ENOENT') {
+				regulate.info('Installing Dependacies')
+				if (shell.exec('cd node_modules/glarce && npm install').code !== 0) {
+					shell.echo('Error: internal Glarce npm install failed')
+					shell.exit(1)
+				}				  
+				fs.writeFileSync('npminstallcomplete.question')
+			} else {
+				throw err
+			}
+		}
 	}
 
 	/**
