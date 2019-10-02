@@ -5,7 +5,7 @@ let shell = require('shelljs')
 
 // Styling libraries
 let chalk = require('chalk')
-let _cliProgress = require('cli-progress')
+let { Bar, Presets } = require('cli-progress')
 
 let Res = require('./lib/res').Res
 let resHandlers = require('./lib/res').handlers
@@ -17,14 +17,12 @@ class Glarce {
 	constructor() {
 		regulate.info('\x1Bc')
 		regulate.info(
-			chalk.cyan(
-				`======================
+			chalk.cyan(`
+======================
         Glarce
   Web AR, Simplified
 ======================
-
-`
-			)
+			`)
 		)
 
 		this.buildLength = 0
@@ -41,12 +39,12 @@ class Glarce {
 			)
 		})
 
-		/** Checks for a file that tells us that it has allready installed the dependancies */
+		/** Checks for a file that tells us that it has already installed the dependencies */
 		try {
 			fs.readFileSync('npminstallcomplete.question')
 		} catch (err) {
 			if (err.code === 'ENOENT') {
-				regulate.info('Installing Dependacies')
+				regulate.info('Installing Dependencies')
 				if (shell.exec('cd node_modules/glarce && npm install').code !== 0) {
 					shell.echo('Error: internal Glarce npm install failed')
 					shell.exit(1)
@@ -64,12 +62,12 @@ class Glarce {
    *  app.set('publicPath', '/myPublicPath/')
    *
    *  devPublicPath:
-   *  Sets the defult path for the development server
+   *  Sets the default path for the development server
    *  app.set('devPublicPath', '/myDevPath/')
    *
    *  server:
-   *  Sets up a server acording to the config you put in. Read the offical documentation on gitbooks
-   *  app.set('server', confing)
+   *  Sets up a server according to the config you put in. Read the docs
+   *  app.set('server', config)
    */
 	set(input, variable) {
 		switch (input) {
@@ -84,7 +82,7 @@ class Glarce {
 			break
 		default:
 			throw new Error(
-				chalk.red.bold(`'${input}' is not a recognised set command`)
+				chalk.red.bold(`'${input}' is not a recognized set command`)
 			)
 		}
 	}
@@ -109,12 +107,12 @@ class Glarce {
 	}
 
 	start() {
-		this.bar = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic)
+		this.bar = new Bar({}, Presets.shades_classic)
 		this.bar.start(this.buildLength, 0)
 
 		this.build()
 
-		// Grab json resHandeler
+		// Grab json resHandler
 		this.json = resHandlers.getJSON()
 
 		this.bar.stop()
@@ -126,7 +124,7 @@ class Glarce {
 
 		regulate.info(chalk.green('Saving JSON'))
 		fs.writeFileSync(
-			'./node_modules/Glarce/src/app.json',
+			'./app.json',
 			JSON.stringify(this.json)
 		)
 
@@ -178,7 +176,7 @@ class Glarce {
 		delete this.getBuilds
 		delete this.json
 
-		fs = shell = _cliProgress = Res = resHandlers = normalize = null
+		fs = shell = Bar = Presets = Res = resHandlers = normalize = null
 
 		regulate.info('\x1Bc')
 		regulate.info(chalk.green('Memory cleared'))
